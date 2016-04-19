@@ -15,9 +15,10 @@ solutions didn't meet the following critera:
 - It should has a documentation,
 - It should be tested.
 
-As a lazy developper, I made this git repo where `a branch = a websockets solution`. All those branches are composed by:
+As a lazy developper, I made this git repo where *a branch = a websockets solution*. All those branches are composed by:
 
 - A README file, used as review of a solution:
+
     - [x] A summary/short review (`tl;dr`),
     - [ ] Is this solution easy to install?
     - [ ] Is this solution easy to integrate into a Django project?
