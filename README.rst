@@ -27,4 +27,4 @@ As a lazy developper, I made this git repo where `a branch = a websockets soluti
     - [ ] Is this solution has a documentation?
     - [ ] Is this solution has unit tests?
 - A sample Django app (``django-admin startproject foo && django-admin startapp myapp``), and configured in order to work with the current websocket solution
-- A ``tox.ini`` file to describe to Tox how its should run all my tests
+- A ``tox.ini`` file to describe to Tox how its should run all my tests
