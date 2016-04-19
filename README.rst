@@ -6,6 +6,10 @@
 Tests for django-socketio_
 ==========================
 
+.. contents::
+    :depth: 2
+
+
 tl;dr
 -----
 
