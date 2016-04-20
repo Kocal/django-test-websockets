@@ -16,6 +16,7 @@
 .idea/dataSources.local.xml
 .idea/sqlDataSources.xml
 /db.sqlite3
+/static
 .idea/dynamic.xml
 .idea/uiDesigner.xml
 
