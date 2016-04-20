@@ -8,9 +8,9 @@ solutions didn't meet the following critera:
 
 - It should be easy to install,
 - It should be easy to integrate into an already existing Django project,
-- It should works under ``Django 1.8`` and ``Django 1.9``,
-- It should works under ``Python 2.7``, ``Python 3.2``, ``Python 3.3``, ``Python 3.4`` and , ``Python 3.5``,
-- It should use a light architecture (extern dependencies, no NodeJS server next to Django for example, ...),
+- It should works under *Django 1.8* and *Django 1.9*,
+- It should works under *Python 2.7*, *Python 3.2*, *Python 3.3*, *Python 3.4* and , *Python 3.5*,
+- It should use a lite architecture (extern dependencies, no NodeJS server next to Django for example, ...),
 - It should be based on the event-driven programming concept,
 - It should has a documentation,
 - It should be tested.
@@ -23,7 +23,7 @@ As a lazy developper, I made this git repo where *a branch = a websockets soluti
    - [ ] Is this solution easy to install?
    - [ ] Is this solution easy to integrate into a Django project?
    - [x] Unit tests with Tox for all version of Django and Python,
-   - [ ] Is this solution using a light architecture or not?
+   - [ ] Is this solution using a lite architecture or not?
    - [ ] Is this solution based on event-driver programming concept?
    - [ ] Is this solution has a documentation?
    - [ ] Is this solution has unit tests?
