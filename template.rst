@@ -316,8 +316,6 @@ Numquam honeste facimus causa facimus ab non honestissime se insectarique sit de
 
 Event-driven programming
 ------------------------
-Yes, SOLUTION_ try to use a SocketIO approach to handle websockets events.
-
 Here a really small example for a webchat:
 
 .. code-block:: python
