@@ -1,4 +1,5 @@
 .. _django-websocket-redis: https://github.com/jrief/django-websocket-redis
+.. _redis: http://redis.io
 .. _tox.ini: tox.ini
 .. _settings.py: DjangoTestWebsockets/settings.py
 .. _urls.py: DjangoTestWebsockets/urls.py
@@ -9,7 +10,6 @@ Tests for django-websocket-redis_
 .. contents::
     :depth: 2
     :backlinks: none
-
 
 Summary
 -------
@@ -31,7 +31,7 @@ Python 3.5    Django 1.9  `py35-django19`_  ✓ Yes or ✗ No         ✓ Yes or
 
 Easy to install?
 ````````````````
-Yes.
+Yes, but dependant of Redis_.
 
 Read more at `Installation`_.
 
@@ -69,9 +69,12 @@ Read more at `Unit tests`_.
 
 Installation
 ------------
-To use django-websocket-redis_, you need to install `Redis <http://redis.io/>`_
+*For more information, you can see the* `Installation section <http://django-websocket-redis.readthedocs.org/en/latest/
+installation.html#installation>`_ *from the official documentation.*
 
-Please, make sure to be into a virtual environment before running Tox.
+To use django-websocket-redis_, you need to install `Redis`_.
+
+Please, make sure to be into a virtual environment before running Tox:
 
 .. code-block:: bash
 
@@ -79,32 +82,69 @@ Please, make sure to be into a virtual environment before running Tox.
     # You are now in your new virtual environment
     $ pip install tox
 
+To check if Redis is up and accepting connections, run:
+
+.. code-block:: bash
+
+    $ redis-cli ping
+    PONG
 
 Integration
 -----------
-Add `django-websocket-redis_snake_case` to your `INSTALLED_APPS` in your settings.py_ file:
+*For more information, you can see the* `Configuration section <http://django-websocket-redis.readthedocs.org/en/latest/
+installation.html#configuration>`_ *from the official documentation.*
+
+Add *ws4redis* to your *INSTALLED_APPS* in your settings.py_ file:
 
 .. code-block:: python
 
     INSTALLED_APPS = [
         # ...
-        'django-websocket-redis_snake_case',
+        'ws4redis',
     ]
 
-Add `django-websocket-redis_snake_case.urls` to your urls.py_ file:
+Always in your settings.py_ file, specify the URL that distinguishes websocket connections from normal requests:
 
 .. code-block:: python
 
-    urlpatterns = [
-        url('', include('django-websocket-redis_snake_case.urls')),
-        # ...
-    ]
+    WEBSOCKET_URL = '/ws/'
 
-Integration into a template:
+If your Redis_ settings are different than the defaults, use this dictionary in your settings.py_ to override these values:
 
-.. code-block:: html+django
+.. code-block:: python
 
-   {# Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus. #}
+    WS4REDIS_CONNECTION = {
+        'host': 'redis.example.com',
+        'port': 16379,
+        'db': 17,
+        'password': 'verysecret',
+    }
+
+Then, you need to add *ws4redis* context_processors to your Django application:
+
+.. code-block:: python
+
+    TEMPLATES = [
+        {
+            'OPTIONS': {
+                'context_processors': [
+                    #...
+                    'django.contrib.auth.context_processors.auth',
+                    'django.template.context_processors.static'
+                    'ws4redis.context_processors.default',
+                    #...
+                ]
+            }
+        }
+
+During your development, you will need to change your *WSGI_APPLICATION* value from your settings.py file.
+I assure you, it will not be used in production while you will use *uwsgi*, *gunicorn* or something else to run your Django
+server:
+
+.. code-block:: python
+
+    WSGI_APPLICATION = 'ws4redis.django_runserver.application'
+
 
 Compatibility
 -------------
