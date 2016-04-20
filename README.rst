@@ -153,8 +153,6 @@ receiving-heartbeat-messages>`_.
 
     WS4REDIS_HEARTBEAT = '--my-heartbeat--'
 
-
-
 Compatibility
 -------------
 Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
@@ -197,7 +195,9 @@ py27-django18
 `````````````
 Websockets server works?
 ''''''''''''''''''''''''
-**✓ Passed!** or **✗ Failed.**
+**✓ Passed!**
+
+NEED TO REWRITE THE JS LIBRARY
 
 Output
 ......
@@ -208,7 +208,7 @@ Output
 
 Django webserver works?
 '''''''''''''''''''''''
-**✓ Passed!** or **✗ Failed.**
+**✓ Passed!**
 
 Output
 ......
@@ -221,7 +221,7 @@ py27-django19
 `````````````
 Websockets server works?
 ''''''''''''''''''''''''
-**✓ Passed!** or **✗ Failed.**
+**✓ Passed!**
 
 Output
 ......
@@ -232,7 +232,7 @@ Output
 
 Django webserver works?
 '''''''''''''''''''''''
-**✓ Passed!** or **✗ Failed.**
+**✓ Passed!**
 
 Output
 ......
@@ -245,7 +245,15 @@ py33-django18
 `````````````
 Websockets server works?
 ''''''''''''''''''''''''
-**✓ Passed!** or **✗ Failed.**
+**✗ Failed.**
+
+File "<frozen importlib._bootstrap>", line 868, in _load_module
+File "<frozen importlib._bootstrap>", line 313, in _call_with_frames_removed
+File "/home/hugo/Dev/DjangoTestWebsockets/.tox/py33-django18/lib/python3.3/site-packages/django/db/backends/sqlite3/base.py", line 36, in <module>
+raise ImproperlyConfigured("Error loading either pysqlite2 or sqlite3 modules (tried in that order): %s" % exc)
+django.core.exceptions.ImproperlyConfigured: Error loading either pysqlite2 or sqlite3 modules (tried in that order): No module named '_sqlite3'
+ERROR: InvocationError: '/home/hugo/Dev/DjangoTestWebsockets/.tox/py33-django18/bin/python manage.py migrate'
+
 
 Output
 ......
@@ -256,7 +264,7 @@ Output
 
 Django webserver works?
 '''''''''''''''''''''''
-**✓ Passed!** or **✗ Failed.**
+ **✗ Failed.**
 
 Output
 ......
@@ -269,7 +277,7 @@ py34-django18
 `````````````
 Websockets server works?
 ''''''''''''''''''''''''
-**✓ Passed!** or **✗ Failed.**
+**✓ Passed!**
 
 Output
 ......
@@ -280,7 +288,7 @@ Output
 
 Django webserver works?
 '''''''''''''''''''''''
-**✓ Passed!** or **✗ Failed.**
+**✓ Passed!**
 
 Output
 ......
@@ -293,7 +301,7 @@ py33-django19
 `````````````
 Websockets server works?
 ''''''''''''''''''''''''
-**✓ Passed!** or **✗ Failed.**
+**✓ Passed!**
 
 Output
 ......
@@ -304,7 +312,7 @@ Output
 
 Django webserver works?
 '''''''''''''''''''''''
-**✓ Passed!** or **✗ Failed.**
+**✓ Passed!**
 
 Output
 ......
