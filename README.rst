@@ -37,7 +37,7 @@ Read more at `Installation`_.
 
 Integration into a Django project
 `````````````````````````````````
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+Hard, I need to rewrite the *ws4redis.js* file.
 
 Read more at `Integration`_.
 
@@ -144,6 +144,15 @@ server:
 .. code-block:: python
 
     WSGI_APPLICATION = 'ws4redis.django_runserver.application'
+
+And then you need to add *WS4REDIS_HEARTBEAT* to your settings.py_ file to keep Websockets alive.
+*See* `official documentation <http://django-websocket-redis.readthedocs.org/en/latest/heartbeats.html#sending-and-
+receiving-heartbeat-messages>`_.
+
+.. code-block:: python
+
+    WS4REDIS_HEARTBEAT = '--my-heartbeat--'
+
 
 
 Compatibility
