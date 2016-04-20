@@ -1,0 +1,7 @@
+{% load staticfiles %}
+
+<script src="{% static 'js/socket.io.js' %}"></script>
+<script>
+    var socket = new io.Socket('localhost', {port: 9000})
+    socket.connect()
+</script>
