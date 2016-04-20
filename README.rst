@@ -19,17 +19,17 @@ As a lazy developper, I made this git repo where *a branch = a websockets soluti
 
 #. A README file, used as review of a solution:
 
-   - [x] A summary/short review (`tl;dr`),
-   - [ ] Is this solution easy to install?
-   - [ ] Is this solution easy to integrate into a Django project?
-   - [x] Unit tests with Tox for all version of Django and Python,
-   - [ ] Is this solution using a lite architecture or not?
-   - [ ] Is this solution based on event-driver programming concept?
-   - [ ] Is this solution has a documentation?
-   - [ ] Is this solution has unit tests?
+   - A summary/short review (`tl;dr`),
+   - Is this solution easy to install?
+   - Is this solution easy to integrate into a Django project?
+   - Unit tests with Tox for all version of Django and Python,
+   - Is this solution using a lite architecture or not?
+   - Is this solution based on event-driver programming concept?
+   - Is this solution has a documentation?
+   - Is this solution has unit tests?
 
 #. A sample Django app (``django-admin startproject foo && django-admin startapp myapp``), and configured in order to work with the current websocket solution
 
 #. A ``tox.ini`` file to describe to Tox how its should run all my tests
 
-#. And soon a ``.travis.yml`` file ;-)
+#. And soon a ``.travis.yml`` file
