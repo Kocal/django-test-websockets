@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+from threading import Thread
+from time import sleep
+import random
+
 from django.contrib.auth.models import User, Group
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
@@ -10,10 +14,24 @@ from ws4redis.publisher import RedisPublisher
 class BroadcastChatView(TemplateView):
     template_name = 'broadcast_chat.html'
 
+    def __init__(self, *args, **kwargs):
+        super(BroadcastChatView, self).__init__(*args, **kwargs)
+        self.redis_publisher = RedisPublisher(facility='foobar', broadcast=True)
+
     def get(self, request, *args, **kwargs):
-        welcome = RedisMessage('Hello everybody')  # create a welcome message to be sent to everybody
-        RedisPublisher(facility='foobar', broadcast=True).publish_message(welcome)
+        self.redis_publisher.publish_message(RedisMessage('Hello everybody'))
+
+        thread = Thread(target=self.thread_function, args=(10,))
+        thread.start()
+
         return super(BroadcastChatView, self).get(request, *args, **kwargs)
+
+    def thread_function(self, arg):
+        for i in range(arg):
+            sleep_time = random.randint(1, 10)
+            message = RedisMessage('[%d/%d] Long task which takes %d seconds...' % (i + 1, arg, sleep_time))
+            self.redis_publisher.publish_message(message)
+            sleep(sleep_time)
 
 
 class UserChatView(TemplateView):
