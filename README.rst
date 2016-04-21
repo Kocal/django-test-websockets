@@ -27,11 +27,11 @@ Python        Django      More details      Web server works?  Channels work?  D
 Python 2.7    Django 1.8  `py27-django18`_  ✓ Yes              ✓ Yes           **✓ Yes**
 Python 2.7    Django 1.9  `py27-django19`_  ✓ Yes              ✓ Yes           **✓ Yes**
 Python 3.2    Django 1.8  `py32-django18`_  ─ Maybe yes        ─ Not tested    **─ It can**
-Python 3.3    Django 1.8  `py33-django18`_  ─ Maybe yes        ─ Not tested    **─ It can**
+Python 3.3    Django 1.8  `py33-django18`_  ✓ Yes              ✓ Yes           **✓ Yes**
 Python 3.4    Django 1.8  `py34-django18`_  ✓ Yes              ✓ Yes           **✓ Yes**
 Python 3.4    Django 1.9  `py34-django19`_  ✓ Yes              ✓ Yes           **✓ Yes**
-Python 3.5    Django 1.8  `py35-django18`_  ✓ Yes or ✗ No      ✓ Yes or ✗ No   **✓ Yes/✗ No**
-Python 3.5    Django 1.9  `py35-django19`_  ✓ Yes or ✗ No      ✓ Yes or ✗ No   **✓ Yes/✗ No**
+Python 3.5    Django 1.8  `py35-django18`_  ✓ Yes              ✓ Yes           **✓ Yes**
+Python 3.5    Django 1.9  `py35-django19`_  ✓ Yes              ✓ Yes           **✓ Yes**
 ============  ==========  ================  =================  ==============  ==============
 
 Easy to install?
@@ -48,7 +48,7 @@ Read more at `Integration`_.
 
 Thin or heavy architecture?
 ```````````````````````````
-Thin, even if django-websocket-redis_ depends of Redis_, it's really easy to install it and Redis_ is lite as f***.
+Thin, even if django-websocket-redis_ depends of Redis_.
 
 Read more at `Architecture`_.
 
@@ -340,43 +340,51 @@ py33-django18
 `````````````
 Web server works?
 '''''''''''''''''
-    **✗ Failed.**
-
-Django is not able to find ``pysqlite2`` nor ``sqlite3``. To resolve this problem, you should compile yourself Python 3.3
-with support of SQLite3 (``libsqlite3-dev``).
+    **✗ Passed!**
 
 Output
 ......
 .. code-block::
 
-    py33-django18 runtests: commands[0] | python manage.py migrate
-    Traceback (most recent call last):
-      File "/home/hugo/Dev/DjangoTestWebsockets/.tox/py33-django18/lib/python3.3/site-packages/django/db/backends/sqlite3/base.py", line 31, in <module>
-        from pysqlite2 import dbapi2 as Database
-    ImportError: No module named 'pysqlite2'
+    py33-django18 runtests: commands[2] | python manage.py runserver --settings=chatserver.settings
+    Performing system checks...
 
-    During handling of the above exception, another exception occurred:
-
-    Traceback (most recent call last):
-      File "/home/hugo/Dev/DjangoTestWebsockets/.tox/py33-django18/lib/python3.3/site-packages/django/db/backends/sqlite3/base.py", line 33, in <module>
-        from sqlite3 import dbapi2 as Database
-      File "/usr/local/lib/python3.3/sqlite3/__init__.py", line 23, in <module>
-        from sqlite3.dbapi2 import *
-      File "/usr/local/lib/python3.3/sqlite3/dbapi2.py", line 26, in <module>
-        from _sqlite3 import *
-    ImportError: No module named '_sqlite3'
-
-    [...]
-
-      File "/home/hugo/Dev/DjangoTestWebsockets/.tox/py33-django18/lib/python3.3/site-packages/django/db/backends/sqlite3/base.py", line 36, in <module>
-        raise ImproperlyConfigured("Error loading either pysqlite2 or sqlite3 modules (tried in that order): %s" % exc)
-    django.core.exceptions.ImproperlyConfigured: Error loading either pysqlite2 or sqlite3 modules (tried in that order): No module named '_sqlite3'
+    System check identified no issues (0 silenced).
+    [2016-04-21 15:18:45,594 utils] DEBUG: (0.008) QUERY = "\n            SELECT name, type FROM sqlite_master\n            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'\n            ORDER BY name" - PARAMS = (); args=None
+    [2016-04-21 15:18:45,610 utils] DEBUG: (0.011) QUERY = 'SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"' - PARAMS = (); args=()
+    April 21, 2016 - 15:18:45
+    Django version 1.8.12, using settings 'chatserver.settings'
+    Starting development server at http://127.0.0.1:8000/
+    Quit the server with CONTROL-C.
+    [2016-04-21 15:18:45,724 django_runserver] INFO: Websocket support is enabled
 
 Channels
 ''''''''
-    **─ Not tested**
+    **✓ Passed!**
 
-As long the web server do not works, I can not test channels.
+*Note: Maybe write real unit tests?*
+
+*Note: the group chatuser is composed of John and Mary.*
+
+==========  =======  =========  ====================  ===============
+Channel     From     To         Recipients             Good behavior?
+==========  =======  =========  ====================  ===============
+Broadcast   Admin    Everybody  Admin, John and Mary  **✓ Yes**
+Broadcast   John     Everybody  Admin, John and Mary  **✓ Yes**
+Broadcast   Mary     Everybody  Admin, John and Mary  **✓ Yes**
+User chat   Admin    Admin      Admin                 **✓ Yes**
+User chat   Admin    John       John                  **✓ Yes**
+User chat   Admin    Mary       Mary                  **✓ Yes**
+User chat   John     Admin      Admin                 **✓ Yes**
+User chat   John     John       John                  **✓ Yes**
+User chat   John     Mary       Mary                  **✓ Yes**
+User chat   Mary     Admin      Admin                 **✓ Yes**
+User chat   Mary     John       John                  **✓ Yes**
+User chat   Mary     Mary       Mary                  **✓ Yes**
+Group user  Admin    chatusers  chatusers             **✓ Yes**
+Group user  John     chatusers  chatusers             **✓ Yes**
+Group user  Mary     chatusers  chatusers             **✓ Yes**
+==========  =======  =========  ====================  ===============
 
 py34-django18
 `````````````
@@ -461,6 +469,120 @@ Output
     April 21, 2016 - 14:48:25
     Django version 1.9.5, using settings 'chatserver.settings'
     Starting development server at http://127.0.0.1:8000/
+
+Channels
+''''''''
+    **✓ Passed!**
+
+*Note: Maybe write real unit tests?*
+
+*Note: the group chatuser is composed of John and Mary.*
+
+==========  =======  =========  ====================  ===============
+Channel     From     To         Recipients             Good behavior?
+==========  =======  =========  ====================  ===============
+Broadcast   Admin    Everybody  Admin, John and Mary  **✓ Yes**
+Broadcast   John     Everybody  Admin, John and Mary  **✓ Yes**
+Broadcast   Mary     Everybody  Admin, John and Mary  **✓ Yes**
+User chat   Admin    Admin      Admin                 **✓ Yes**
+User chat   Admin    John       John                  **✓ Yes**
+User chat   Admin    Mary       Mary                  **✓ Yes**
+User chat   John     Admin      Admin                 **✓ Yes**
+User chat   John     John       John                  **✓ Yes**
+User chat   John     Mary       Mary                  **✓ Yes**
+User chat   Mary     Admin      Admin                 **✓ Yes**
+User chat   Mary     John       John                  **✓ Yes**
+User chat   Mary     Mary       Mary                  **✓ Yes**
+Group user  Admin    chatusers  chatusers             **✓ Yes**
+Group user  John     chatusers  chatusers             **✓ Yes**
+Group user  Mary     chatusers  chatusers             **✓ Yes**
+==========  =======  =========  ====================  ===============
+
+py35-django18
+`````````````
+Web server works?
+'''''''''''''''''
+    **✓ Passed!**
+
+Output
+......
+.. code-block::
+
+    py35-django18 runtests: commands[2] | python manage.py runserver --settings=chatserver.settings
+    Performing system checks...
+
+    System check identified no issues (0 silenced).
+    [2016-04-21 15:32:32,003 utils] DEBUG: (0.001) QUERY = "\n            SELECT name, type FROM sqlite_master\n            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'\n            ORDER BY name" - PARAMS = (); args=None
+    [2016-04-21 15:32:32,008 utils] DEBUG: (0.000) QUERY = 'SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"' - PARAMS = (); args=()
+    April 21, 2016 - 15:32:32
+    Django version 1.8.12, using settings 'chatserver.settings'
+    Starting development server at http://127.0.0.1:8000/
+    Quit the server with CONTROL-C.
+    [2016-04-21 15:32:32,764 django_runserver] INFO: Websocket support is enabled
+
+Channels
+''''''''
+    **✓ Passed!**
+
+*Note: Maybe write real unit tests?*
+
+*Note: the group chatuser is composed of John and Mary.*
+
+==========  =======  =========  ====================  ===============
+Channel     From     To         Recipients             Good behavior?
+==========  =======  =========  ====================  ===============
+Broadcast   Admin    Everybody  Admin, John and Mary  **✓ Yes**
+Broadcast   John     Everybody  Admin, John and Mary  **✓ Yes**
+Broadcast   Mary     Everybody  Admin, John and Mary  **✓ Yes**
+User chat   Admin    Admin      Admin                 **✓ Yes**
+User chat   Admin    John       John                  **✓ Yes**
+User chat   Admin    Mary       Mary                  **✓ Yes**
+User chat   John     Admin      Admin                 **✓ Yes**
+User chat   John     John       John                  **✓ Yes**
+User chat   John     Mary       Mary                  **✓ Yes**
+User chat   Mary     Admin      Admin                 **✓ Yes**
+User chat   Mary     John       John                  **✓ Yes**
+User chat   Mary     Mary       Mary                  **✓ Yes**
+Group user  Admin    chatusers  chatusers             **✓ Yes**
+Group user  John     chatusers  chatusers             **✓ Yes**
+Group user  Mary     chatusers  chatusers             **✓ Yes**
+==========  =======  =========  ====================  ===============
+
+py35-django19
+`````````````
+Web server works?
+'''''''''''''''''
+    **✓ Passed!**
+
+Note: Again, we have some ``RemovedInDjango110Warning`` because of *Django 1.9*:
+
+- ``You haven't defined a TEMPLATES setting. You must do so before upgrading to Django 1.10. Otherwise Django will be unable to load templates.``
+- ``django.conf.urls.patterns() is deprecated and will be removed in Django 1.10. Update your urlpatterns to be a list of django.conf.urls.url() instances instead.``
+
+Output
+......
+.. code-block::
+
+    py35-django19 runtests: commands[2] | python manage.py runserver --settings=chatserver.settings
+    Performing system checks...
+
+    /home/hugo/Dev/DjangoTestWebsockets/.tox/py35-django19/lib/python3.5/site-packages/django/template/utils.py:37: RemovedInDjango110Warning: You haven't defined a TEMPLATES setting. You must do so before upgrading to Django 1.10. Otherwise Django will be unable to load templates.
+      "unable to load templates.", RemovedInDjango110Warning)
+
+    /home/hugo/Dev/DjangoTestWebsockets/chatserver/urls.py:17: RemovedInDjango110Warning: django.conf.urls.patterns() is deprecated and will be removed in Django 1.10. Update your urlpatterns to be a list of django.conf.urls.url() instances instead.
+      url(r'^$', RedirectView.as_view(url=reverse_lazy('broadcast_chat'))),
+
+    System check identified no issues (0 silenced).
+    [2016-04-21 15:35:47,474 utils] DEBUG: (0.001)
+                SELECT name, type FROM sqlite_master
+                WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+                ORDER BY name; args=None
+    [2016-04-21 15:35:47,479 utils] DEBUG: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+    April 21, 2016 - 15:35:47
+    Django version 1.9.5, using settings 'chatserver.settings'
+    Starting development server at http://127.0.0.1:8000/
+    Quit the server with CONTROL-C.
+    [2016-04-21 15:35:47,706 django_runserver] INFO: Websocket support is enabled
 
 Channels
 ''''''''
