@@ -26,10 +26,11 @@ Python        Django      More details      Web server works?  Channels work?  D
 ============  ==========  ================  =================  ==============  ==============
 Python 2.7    Django 1.8  `py27-django18`_  ✓ Yes              ✓ Yes           **✓ Yes**
 Python 2.7    Django 1.9  `py27-django19`_  ✓ Yes              ✓ Yes           **✓ Yes**
-Python 3.3    Django 1.8  `py33-django18`_  ✗ No               ─ Not tested    **✗ No**
-Python 3.3    Django 1.9  `py33-django19`_  ✓ Yes or ✗ No      ✓ Yes or ✗ No   **✓ Yes/✗ No**
-Python 3.4    Django 1.8  `py34-django18`_  ✓ Yes or ✗ No      ✓ Yes or ✗ No   **✓ Yes/✗ No**
-Python 3.4    Django 1.9  `py34-django19`_  ✓ Yes or ✗ No      ✓ Yes or ✗ No   **✓ Yes/✗ No**
+Python 3.2    Django 1.8  `py32-django18`_  ─ Maybe yes        ─ Not tested    **─ It can**
+Python 3.3    Django 1.8  `py33-django18`_  ─ Maybe yes        ─ Not tested    **─ It can**
+Python 3.4    Django 1.8  `py34-django18`_  ✓ Yes              ✓ Yes           **✓ Yes**
+Python 3.4    Django 1.9  `py34-django19`_  ✓ Yes              ✓ Yes           **✓ Yes**
+Python 3.5    Django 1.8  `py35-django18`_  ✓ Yes or ✗ No      ✓ Yes or ✗ No   **✓ Yes/✗ No**
 Python 3.5    Django 1.9  `py35-django19`_  ✓ Yes or ✗ No      ✓ Yes or ✗ No   **✓ Yes/✗ No**
 ============  ==========  ================  =================  ==============  ==============
 
@@ -311,6 +312,30 @@ Group user  John     chatusers  chatusers             **✓ Yes**
 Group user  Mary     chatusers  chatusers             **✓ Yes**
 ==========  =======  =========  ====================  ===============
 
+py32-django18
+`````````````
+    **✗ Failed.**
+
+Failed because ``pip`` for *Python 3.2* is broken.
+
+.. code-block::
+
+    New python executable in /home/hugo/Dev/DjangoTestWebsockets/.tox/py32-django18/bin/python3.2
+    Also creating executable in /home/hugo/Dev/DjangoTestWebsockets/.tox/py32-django18/bin/python
+    Installing setuptools, pip, wheel...
+      Complete output from command /home/hugo/Dev/Djang...ango18/bin/python3.2 - setuptools pip wheel:
+      /home/hugo/.virtualenvs/dtws-django-webksocket-redis/lib/python3.3/site-packages/virtualenv_support/pip-8.1.1-py2.py3-none-any.whl/pip/_vendor/pkg_resources/__init__.py:87: UserWarning: Support for Python 3.0-3.2 has been dropped. Future versions will fail here.
+    Traceback (most recent call last):
+      File "<stdin>", line 7, in <module>
+      File "/home/hugo/.virtualenvs/dtws-django-webksocket-redis/lib/python3.3/site-packages/virtualenv_support/pip-8.1.1-py2.py3-none-any.whl/pip/__init__.py", line 16, in <module>
+      File "/home/hugo/.virtualenvs/dtws-django-webksocket-redis/lib/python3.3/site-packages/virtualenv_support/pip-8.1.1-py2.py3-none-any.whl/pip/vcs/mercurial.py", line 9, in <module>
+      File "/home/hugo/.virtualenvs/dtws-django-webksocket-redis/lib/python3.3/site-packages/virtualenv_support/pip-8.1.1-py2.py3-none-any.whl/pip/download.py", line 36, in <module>
+      File "/home/hugo/.virtualenvs/dtws-django-webksocket-redis/lib/python3.3/site-packages/virtualenv_support/pip-8.1.1-py2.py3-none-any.whl/pip/utils/ui.py", line 15, in <module>
+      File "/home/hugo/.virtualenvs/dtws-django-webksocket-redis/lib/python3.3/site-packages/virtualenv_support/pip-8.1.1-py2.py3-none-any.whl/pip/_vendor/progress/bar.py", line 48
+        empty_fill = u'∙'
+                          ^
+    SyntaxError: invalid syntax
+
 py33-django18
 `````````````
 Web server works?
@@ -357,53 +382,113 @@ py34-django18
 `````````````
 Web server works?
 '''''''''''''''''
-    **✓ Passed!** or **✗ Failed.**
+    **✗ Passed!**
 
 Output
 ......
 .. code-block::
 
-    py34-django18 runtests: commands[1] | python manage.py runserver
-    #...
+    py34-django18 runtests: commands[2] | python manage.py runserver --settings=chatserver.settings
+    Performing system checks...
 
-py33-django19
-`````````````
-Web server works?
-'''''''''''''''''
-    **✓ Passed!** or **✗ Failed.**
+    System check identified no issues (0 silenced).
+    [2016-04-21 14:37:46,295 utils] DEBUG: (0.001) QUERY = "\n            SELECT name, type FROM sqlite_master\n            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'\n            ORDER BY name" - PARAMS = (); args=None
+    [2016-04-21 14:37:46,299 utils] DEBUG: (0.000) QUERY = 'SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"' - PARAMS = (); args=()
+    April 21, 2016 - 14:37:46
+    Django version 1.8.12, using settings 'chatserver.settings'
+    Starting development server at http://127.0.0.1:8000/
+    Quit the server with CONTROL-C.
+    [2016-04-21 14:37:46,377 django_runserver] INFO: Websocket support is enabled
 
-Output
-......
-.. code-block::
+Channels
+''''''''
+    **✓ Passed!**
 
-    py33-django19 runtests: commands[1] | python manage.py runserver
-    #...
+*Note: Maybe write real unit tests?*
+
+*Note: the group chatuser is composed of John and Mary.*
+
+==========  =======  =========  ====================  ===============
+Channel     From     To         Recipients             Good behavior?
+==========  =======  =========  ====================  ===============
+Broadcast   Admin    Everybody  Admin, John and Mary  **✓ Yes**
+Broadcast   John     Everybody  Admin, John and Mary  **✓ Yes**
+Broadcast   Mary     Everybody  Admin, John and Mary  **✓ Yes**
+User chat   Admin    Admin      Admin                 **✓ Yes**
+User chat   Admin    John       John                  **✓ Yes**
+User chat   Admin    Mary       Mary                  **✓ Yes**
+User chat   John     Admin      Admin                 **✓ Yes**
+User chat   John     John       John                  **✓ Yes**
+User chat   John     Mary       Mary                  **✓ Yes**
+User chat   Mary     Admin      Admin                 **✓ Yes**
+User chat   Mary     John       John                  **✓ Yes**
+User chat   Mary     Mary       Mary                  **✓ Yes**
+Group user  Admin    chatusers  chatusers             **✓ Yes**
+Group user  John     chatusers  chatusers             **✓ Yes**
+Group user  Mary     chatusers  chatusers             **✓ Yes**
+==========  =======  =========  ====================  ===============
 
 py34-django19
 `````````````
 Web server works?
 '''''''''''''''''
-    **✓ Passed!** or **✗ Failed.**
+    **✓ Passed!**
+
+Note: Again, we have some ``RemovedInDjango110Warning`` because of *Django 1.9*:
+
+- ``You haven't defined a TEMPLATES setting. You must do so before upgrading to Django 1.10. Otherwise Django will be unable to load templates.``
+- ``django.conf.urls.patterns() is deprecated and will be removed in Django 1.10. Update your urlpatterns to be a list of django.conf.urls.url() instances instead.``
 
 Output
 ......
 .. code-block::
 
-    py34-django19 runtests: commands[1] | python manage.py runserver
-    #...
+    py34-django19 runtests: commands[2] | python manage.py runserver --settings=chatserver.settings
+    Performing system checks...
 
-py35-django19
-`````````````
-Web server works?
-'''''''''''''''''
-**✓ Passed!** or **✗ Failed.**
+    /home/hugo/Dev/DjangoTestWebsockets/.tox/py34-django19/lib/python3.4/site-packages/django/template/utils.py:37: RemovedInDjango110Warning: You haven't defined a TEMPLATES setting. You must do so before upgrading to Django 1.10. Otherwise Django will be unable to load templates.
+      "unable to load templates.", RemovedInDjango110Warning)
 
-Output
-......
-.. code-block::
+    /home/hugo/Dev/DjangoTestWebsockets/chatserver/urls.py:17: RemovedInDjango110Warning: django.conf.urls.patterns() is deprecated and will be removed in Django 1.10. Update your urlpatterns to be a list of django.conf.urls.url() instances instead.
+      url(r'^$', RedirectView.as_view(url=reverse_lazy('broadcast_chat'))),
 
-    py35-django19 runtests: commands[1] | python manage.py runserver
-    #...
+    System check identified no issues (0 silenced).
+    [2016-04-21 14:48:25,705 utils] DEBUG: (0.001)
+                SELECT name, type FROM sqlite_master
+                WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+                ORDER BY name; args=None
+    [2016-04-21 14:48:25,709 utils] DEBUG: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+    April 21, 2016 - 14:48:25
+    Django version 1.9.5, using settings 'chatserver.settings'
+    Starting development server at http://127.0.0.1:8000/
+
+Channels
+''''''''
+    **✓ Passed!**
+
+*Note: Maybe write real unit tests?*
+
+*Note: the group chatuser is composed of John and Mary.*
+
+==========  =======  =========  ====================  ===============
+Channel     From     To         Recipients             Good behavior?
+==========  =======  =========  ====================  ===============
+Broadcast   Admin    Everybody  Admin, John and Mary  **✓ Yes**
+Broadcast   John     Everybody  Admin, John and Mary  **✓ Yes**
+Broadcast   Mary     Everybody  Admin, John and Mary  **✓ Yes**
+User chat   Admin    Admin      Admin                 **✓ Yes**
+User chat   Admin    John       John                  **✓ Yes**
+User chat   Admin    Mary       Mary                  **✓ Yes**
+User chat   John     Admin      Admin                 **✓ Yes**
+User chat   John     John       John                  **✓ Yes**
+User chat   John     Mary       Mary                  **✓ Yes**
+User chat   Mary     Admin      Admin                 **✓ Yes**
+User chat   Mary     John       John                  **✓ Yes**
+User chat   Mary     Mary       Mary                  **✓ Yes**
+Group user  Admin    chatusers  chatusers             **✓ Yes**
+Group user  John     chatusers  chatusers             **✓ Yes**
+Group user  Mary     chatusers  chatusers             **✓ Yes**
+==========  =======  =========  ====================  ===============
 
 Architecture
 ------------
