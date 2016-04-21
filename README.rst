@@ -200,7 +200,7 @@ py27-django18
 `````````````
 Web server works?
 '''''''''''''''''
-**✓ Passed!**
+    **✓ Passed!**
 
 Output
 ......
@@ -220,7 +220,7 @@ Output
 
 Channels
 ''''''''
-**✓ Passed!**
+    **✓ Passed!**
 
 *Note: Maybe write real unit tests?*
 
@@ -250,7 +250,7 @@ py27-django19
 `````````````
 Web server works?
 '''''''''''''''''
-**✓ Passed!**
+    **✓ Passed!**
 
 Note: we have some ``RemovedInDjango110Warning``:
 
@@ -285,7 +285,7 @@ Output
 
 Channels
 ''''''''
-**✓ Passed!**
+    **✓ Passed!**
 
 *Note: Maybe write real unit tests?*
 
@@ -315,7 +315,7 @@ py33-django18
 `````````````
 Web server works?
 '''''''''''''''''
- **✗ Failed.**
+    **✗ Failed.**
 
 Django is not able to find ``pysqlite2`` nor ``sqlite3``. To resolve this problem, you should compile yourself Python 3.3
 with support of SQLite3 (``libsqlite3-dev``).
@@ -349,7 +349,7 @@ Output
 
 Channels
 ''''''''
-**─ Not tested**
+    **─ Not tested**
 
 As long the web server do not works, I can not test channels.
 
@@ -357,7 +357,7 @@ py34-django18
 `````````````
 Web server works?
 '''''''''''''''''
-**✓ Passed!**
+    **✓ Passed!** or **✗ Failed.**
 
 Output
 ......
@@ -370,7 +370,7 @@ py33-django19
 `````````````
 Web server works?
 '''''''''''''''''
-**✓ Passed!**
+    **✓ Passed!** or **✗ Failed.**
 
 Output
 ......
@@ -383,7 +383,7 @@ py34-django19
 `````````````
 Web server works?
 '''''''''''''''''
-**✓ Passed!** or **✗ Failed.**
+    **✓ Passed!** or **✗ Failed.**
 
 Output
 ......
