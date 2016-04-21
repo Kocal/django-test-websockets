@@ -41,13 +41,13 @@ Read more at `Installation`_.
 
 Integration into a Django project
 `````````````````````````````````
-Hard, I need to rewrite the *ws4redis.js* file.
+Easy, but need some investment to integrate django-websocket-redis_ to an existing Django project.
 
 Read more at `Integration`_.
 
 Thin or heavy architecture?
 ```````````````````````````
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+Thin, even if django-websocket-redis_ depends of Redis_, it's really easy to install it and Redis_ is lite as f***.
 
 Read more at `Architecture`_.
 
@@ -95,10 +95,15 @@ To check if Redis is up and accepting connections, run:
 
 Integration
 -----------
-*For more information, you can see the* `Configuration section <http://django-websocket-redis.readthedocs.org/en/latest/
+*For more information, you can take a look to the* `Configuration section <http://django-websocket-redis.readthedocs.org/en/latest/
 installation.html#configuration>`_ *from the official documentation.*
 
-Add *ws4redis* to your *INSTALLED_APPS* in your settings.py_ file:
+Instead of configure my own Django project, I will use the official demo (`chatserver <https://github.com/jrief/django-
+websocket-redis/tree/master/examples/chatserver>`_) during my tests with Tox to test django-websocket-redis_, because I'm lazy.
+
+If you really want to configure for your project, here are some settings below:
+
+1. Add *ws4redis* to your *INSTALLED_APPS* in your settings.py_ file:
 
 .. code-block:: python
 
@@ -107,13 +112,13 @@ Add *ws4redis* to your *INSTALLED_APPS* in your settings.py_ file:
         'ws4redis',
     ]
 
-Always in your settings.py_ file, specify the URL that distinguishes websocket connections from normal requests:
+2. Always in your settings.py_ file, specify the URL that distinguishes websocket connections from normal requests:
 
 .. code-block:: python
 
     WEBSOCKET_URL = '/ws/'
 
-If your Redis_ settings are different than the defaults, use this dictionary in your settings.py_ to override these values:
+3. If your Redis_ settings are different than the defaults, use this dictionary in your settings.py_ to override these values:
 
 .. code-block:: python
 
@@ -124,7 +129,7 @@ If your Redis_ settings are different than the defaults, use this dictionary in 
         'password': 'verysecret',
     }
 
-Then, you need to add *ws4redis* context_processors to your Django application:
+4. Then, you need to add *ws4redis* context_processors to your Django application:
 
 .. code-block:: python
 
@@ -141,7 +146,7 @@ Then, you need to add *ws4redis* context_processors to your Django application:
             }
         }
 
-During your development, you will need to change your *WSGI_APPLICATION* value from your settings.py file.
+5. During your development, you will need to change your *WSGI_APPLICATION* value from your settings.py file.
 I assure you, it will not be used in production while you will use *uwsgi*, *gunicorn* or something else to run your Django
 server:
 
@@ -149,7 +154,7 @@ server:
 
     WSGI_APPLICATION = 'ws4redis.django_runserver.application'
 
-And then you need to add *WS4REDIS_HEARTBEAT* to your settings.py_ file to keep Websockets alive.
+6. And then you need to add *WS4REDIS_HEARTBEAT* to your settings.py_ file to keep Websockets alive.
 *See* `official documentation <http://django-websocket-redis.readthedocs.org/en/latest/heartbeats.html#sending-and-
 receiving-heartbeat-messages>`_.
 

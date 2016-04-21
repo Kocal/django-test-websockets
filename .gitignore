@@ -135,4 +135,8 @@ ENV/
 
 # Rope project settings
 .ropeproject
-
+/.idea/DjangoTestWebsockets.iml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/misc.xml
+/.idea/modules.xml
