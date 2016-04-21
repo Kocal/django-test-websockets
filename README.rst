@@ -7,6 +7,10 @@
 
 Tests for django-websocket-redis_
 =================================
+
+- GitHub repo: https://github.com/jrief/django-websocket-redis
+- Documentation: http://django-websocket-redis.readthedocs.org/en/latest/
+
 .. contents::
     :depth: 2
     :backlinks: none
