@@ -18,7 +18,7 @@ DATABASES = {
 
 SITE_ID = 1
 
-ROOT_URLCONF = 'myapp.urls'
+ROOT_URLCONF = 'chatserver.urls'
 
 SECRET_KEY = 'super.secret'
 
@@ -39,9 +39,9 @@ STATIC_ROOT = os.environ.get('DJANGO_STATIC_ROOT', '')
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
-SESSION_ENGINE = 'redis_sessions.session'
-
-SESSION_REDIS_PREFIX = 'session'
+# SESSION_ENGINE = 'redis_sessions.session'
+#
+# SESSION_REDIS_PREFIX = 'session'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
@@ -76,7 +76,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ws4redis',
-    'myapp',
+    'chatserver',
 )
 
 # These two middleware classes must be present, if messages sent or received through a websocket

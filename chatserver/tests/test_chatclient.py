@@ -238,7 +238,7 @@ class WebsocketTests(LiveServerTestCase):
         self.assertTrue(True)  # Passes because all channels allowed.
         ws.close()
 
-        callbacks = [denied_channels, 'myapp.tests.denied_channels.denied_channels']
+        callbacks = [denied_channels, 'chatserver.tests.denied_channels.denied_channels']
         for callback in callbacks:
             private_settings.WS4REDIS_ALLOWED_CHANNELS = callback
             try:

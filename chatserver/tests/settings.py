@@ -11,7 +11,7 @@ DATABASES = {
 
 SITE_ID = 1
 
-ROOT_URLCONF = 'myapp.urls'
+ROOT_URLCONF = 'chatserver.urls'
 
 SECRET_KEY = 'super.secret'
 
@@ -60,7 +60,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_nose',
     'ws4redis',
-    'myapp',
+    'chatserver',
 )
 
 # These two middleware classes must be present, if messages sent or received through a websocket

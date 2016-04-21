@@ -7,7 +7,7 @@ setup(
     author="Hugo ALLIAUME",
     author_email="kocal@live.fr",
     license="MIT",
-    packages=['DjangoTestWebsockets', 'myapp'],
+    packages=['DjangoTestWebsockets', 'chatserver'],
     classifiers=[
         "Topic :: Utilities",
     ],
