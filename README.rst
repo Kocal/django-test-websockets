@@ -2,8 +2,8 @@
 .. _redis: http://redis.io
 .. _tox.ini: tox.ini
 .. _settings.py: DjangoTestWebsockets/settings.py
+.. _chatserver.settings: chatserver/settings.py
 .. _urls.py: DjangoTestWebsockets/urls.py
-.. _index.html: myapp/templates/myapp/index.html
 
 Tests for django-websocket-redis_
 =================================
@@ -21,17 +21,17 @@ Compatibility with Python and Django
 ````````````````````````````````````
 Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
 
-============  ==========  ================  ====================  ========================  =============
-Python        Django      More details      Django server works?  Websockets server works?  Does it work?
-============  ==========  ================  ====================  ========================  =============
-Python 2.7    Django 1.8  `py27-django18`_  ✓ Yes or ✗ No         ✓ Yes or ✗ No             **✓ Yes/✗ No**
-Python 2.7    Django 1.9  `py27-django19`_  ✓ Yes or ✗ No         ✓ Yes or ✗ No             **✓ Yes/✗ No**
-Python 3.3    Django 1.8  `py33-django18`_  ✓ Yes or ✗ No         ✓ Yes or ✗ No             **✓ Yes/✗ No**
-Python 3.3    Django 1.9  `py33-django19`_  ✓ Yes or ✗ No         ✓ Yes or ✗ No             **✓ Yes/✗ No**
-Python 3.4    Django 1.8  `py34-django18`_  ✓ Yes or ✗ No         ✓ Yes or ✗ No             **✓ Yes/✗ No**
-Python 3.4    Django 1.9  `py34-django19`_  ✓ Yes or ✗ No         ✓ Yes or ✗ No             **✓ Yes/✗ No**
-Python 3.5    Django 1.9  `py35-django19`_  ✓ Yes or ✗ No         ✓ Yes or ✗ No             **✓ Yes/✗ No**
-============  ==========  ================  ====================  ========================  =============
+============  ==========  ================  =================  ==============  ==============
+Python        Django      More details      Web server works?  Channels work?  Does it work?
+============  ==========  ================  =================  ==============  ==============
+Python 2.7    Django 1.8  `py27-django18`_  ✓ Yes              ✓ Yes           **✓ Yes**
+Python 2.7    Django 1.9  `py27-django19`_  ✓ Yes or ✗ No                      **✓ Yes/✗ No**
+Python 3.3    Django 1.8  `py33-django18`_  ✓ Yes or ✗ No                      **✓ Yes/✗ No**
+Python 3.3    Django 1.9  `py33-django19`_  ✓ Yes or ✗ No                      **✓ Yes/✗ No**
+Python 3.4    Django 1.8  `py34-django18`_  ✓ Yes or ✗ No                      **✓ Yes/✗ No**
+Python 3.4    Django 1.9  `py34-django19`_  ✓ Yes or ✗ No                      **✓ Yes/✗ No**
+Python 3.5    Django 1.9  `py35-django19`_  ✓ Yes or ✗ No                      **✓ Yes/✗ No**
+============  ==========  ================  =================  ==============  ==============
 
 Easy to install?
 ````````````````
@@ -164,27 +164,23 @@ receiving-heartbeat-messages>`_.
 
 Compatibility
 -------------
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+Running web server
+``````````````````
+Due to ``WSGI_APPLICATION = 'ws4redis.django_runserver.application'`` in the chatserver.settings_ file, there will be
+only one server to run. But of course, it will not works in production while you will use *uwsgi* or *gunicorn* for your
+deployment.
 
-Running websockets server
-`````````````````````````
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+*Read more at* http://django-websocket-redis.readthedocs.org/en/latest/running.html.
 
-.. code-block:: bash
-
-    $ workon dtws-django-websocket-redis
-    $ COMMAND TO RUN
-
-Running Django server
-`````````````````````
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+Before running the web server to test the chatserver application, you need to migrate and load fixtures (but Tox will
+do that for you):
 
 .. code-block:: bash
 
     $ workon dtws-django-websocket-redis
     $ python manage.py migrate
-    $ python manage.py runserver
-
+    $ python manage.py loaddata chatserver/fixtures/data.json
+    $ python manage.py runserver --settings=chatserver.settings
 
 Test compatibility with different version of Python and Django
 ``````````````````````````````````````````````````````````````
@@ -198,49 +194,61 @@ To run a specific test, run for example:
 
 .. code-block:: bash
 
-    $ tox -e py27-django19
+    $ tox -e py27-django18
 
 py27-django18
 `````````````
-Websockets server works?
-''''''''''''''''''''''''
-**✓ Passed!**
-
-NEED TO REWRITE THE JS LIBRARY
-
-Output
-......
-.. code-block::
-
-    py27-django18 runtests: commands[0] | COMMAND TO RUN
-    # ...
-
-Django webserver works?
-'''''''''''''''''''''''
+Web server works?
+'''''''''''''''''
 **✓ Passed!**
 
 Output
 ......
 .. code-block::
 
-    py27-django18 runtests: commands[1] | python manage.py runserver
-    #...
+    py27-django18 runtests: commands[2] | python manage.py runserver --settings=chatserver.settings
+    Performing system checks...
+
+    System check identified no issues (0 silenced).
+    [2016-04-21 10:26:48,021 utils] DEBUG: (0.002) QUERY = "\n            SELECT name, type FROM sqlite_master\n            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'\n            ORDER BY name" - PARAMS = (); args=None
+    [2016-04-21 10:26:48,027 utils] DEBUG: (0.001) QUERY = u'SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"' - PARAMS = (); args=()
+    April 21, 2016 - 10:26:48
+    Django version 1.8.12, using settings 'chatserver.settings'
+    Starting development server at http://127.0.0.1:8000/
+    Quit the server with CONTROL-C.
+    [2016-04-21 10:26:48,155 django_runserver] INFO: Websocket support is enabled
+
+Channels
+''''''''
+**✓ Passed!**
+
+*Maybe write real unit tests?*
+
+==========  =======  =========  ====================  ===============
+Channel     From     To         Recipients             Good behavior?
+==========  =======  =========  ====================  ===============
+Broadcast   Admin    Everybody  Admin, John and Mary  **✓ Yes**
+Broadcast   John     Everybody  Admin, John and Mary  **✓ Yes**
+Broadcast   Mary     Everybody  Admin, John and Mary  **✓ Yes**
+User chat   Admin    Admin      Admin                 **✓ Yes**
+User chat   Admin    John       John                  **✓ Yes**
+User chat   Admin    Mary       Mary                  **✓ Yes**
+User chat   John     Admin      Admin                 **✓ Yes**
+User chat   John     John       John                  **✓ Yes**
+User chat   John     Mary       Mary                  **✓ Yes**
+User chat   Mary     Admin      Admin                 **✓ Yes**
+User chat   Mary     John       John                  **✓ Yes**
+User chat   Mary     Mary       Mary                  **✓ Yes**
+Group user  Admin    chatusers  chatusers             **✓ Yes**
+Group user  John     chatusers  chatusers             **✓ Yes**
+Group user  Mary     chatusers  chatusers             **✓ Yes**
+==========  =======  =========  ====================  ===============
+
 
 py27-django19
 `````````````
-Websockets server works?
-''''''''''''''''''''''''
-**✓ Passed!**
-
-Output
-......
-.. code-block::
-
-    py27-django19 runtests: commands[0] | COMMAND TO RUN
-    # ...
-
-Django webserver works?
-'''''''''''''''''''''''
+Web server works?
+'''''''''''''''''
 **✓ Passed!**
 
 Output
@@ -252,27 +260,8 @@ Output
 
 py33-django18
 `````````````
-Websockets server works?
-''''''''''''''''''''''''
-**✗ Failed.**
-
-File "<frozen importlib._bootstrap>", line 868, in _load_module
-File "<frozen importlib._bootstrap>", line 313, in _call_with_frames_removed
-File "/home/hugo/Dev/DjangoTestWebsockets/.tox/py33-django18/lib/python3.3/site-packages/django/db/backends/sqlite3/base.py", line 36, in <module>
-raise ImproperlyConfigured("Error loading either pysqlite2 or sqlite3 modules (tried in that order): %s" % exc)
-django.core.exceptions.ImproperlyConfigured: Error loading either pysqlite2 or sqlite3 modules (tried in that order): No module named '_sqlite3'
-ERROR: InvocationError: '/home/hugo/Dev/DjangoTestWebsockets/.tox/py33-django18/bin/python manage.py migrate'
-
-
-Output
-......
-.. code-block::
-
-    py33-django18 runtests: commands[0] | COMMAND TO RUN
-    # ...
-
-Django webserver works?
-'''''''''''''''''''''''
+Web server works?
+'''''''''''''''''
  **✗ Failed.**
 
 Output
@@ -284,19 +273,8 @@ Output
 
 py34-django18
 `````````````
-Websockets server works?
-''''''''''''''''''''''''
-**✓ Passed!**
-
-Output
-......
-.. code-block::
-
-    py34-django18 runtests: commands[0] | COMMAND TO RUN
-    # ...
-
-Django webserver works?
-'''''''''''''''''''''''
+Web server works?
+'''''''''''''''''
 **✓ Passed!**
 
 Output
@@ -308,19 +286,8 @@ Output
 
 py33-django19
 `````````````
-Websockets server works?
-''''''''''''''''''''''''
-**✓ Passed!**
-
-Output
-......
-.. code-block::
-
-    py33-django19 runtests: commands[0] | COMMAND TO RUN
-    # ...
-
-Django webserver works?
-'''''''''''''''''''''''
+Web server works?
+'''''''''''''''''
 **✓ Passed!**
 
 Output
@@ -332,19 +299,8 @@ Output
 
 py34-django19
 `````````````
-Websockets server works?
-''''''''''''''''''''''''
-**✓ Passed!** or **✗ Failed.**
-
-Output
-......
-.. code-block::
-
-    py34-django19 runtests: commands[0] | COMMAND TO RUN
-    # ...
-
-Django webserver works?
-'''''''''''''''''''''''
+Web server works?
+'''''''''''''''''
 **✓ Passed!** or **✗ Failed.**
 
 Output
@@ -356,19 +312,8 @@ Output
 
 py35-django19
 `````````````
-Websockets server works?
-''''''''''''''''''''''''
-**✓ Passed!** or **✗ Failed.**
-
-Output
-......
-.. code-block::
-
-    py35-django19 runtests: commands[0] | COMMAND TO RUN
-    # ...
-
-Django webserver works?
-'''''''''''''''''''''''
+Web server works?
+'''''''''''''''''
 **✓ Passed!** or **✗ Failed.**
 
 Output
