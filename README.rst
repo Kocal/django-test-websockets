@@ -54,7 +54,7 @@ Read more at `Architecture`_.
 
 Event-driven programming?
 `````````````````````````
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+No, it uses AJAX to send datas to the server, but it uses Websocket to receive datas from the server.
 
 Read more at `Event-driven programming`_.
 
@@ -618,11 +618,84 @@ Numquam honeste facimus causa facimus ab non honestissime se insectarique sit de
 
 Event-driven programming
 ------------------------
-Here a really small example for a webchat:
+django-websocket-redis_ does not provide an event-driven programming like SocketIO, because it's using Redis_.
+
+Client side
+```````````
+For example, take a look to the `user_chat.html <chatserver/templates/user_chat.html>`_ file from the official demo:
+
+.. code-block:: javascript+django
+
+    var ws4redis = WS4Redis({
+        uri: '{{ WEBSOCKET_URI }}foobar?subscribe-user',
+        receive_message: receiveMessage,
+        heartbeat_msg: {{ WS4REDIS_HEARTBEAT }}
+    });
+
+    function sendMessage() {
+        $.post('{% url "user_chat" %}', {
+            user: 'john',
+            message: 'My message'
+        });
+    }
+
+    function receiveMessage(msg) {
+        console.log('Got a message:', msg);
+    }
+
+    // ...
+
+For me it's really a barbarian way to use a two different communication ways with the server. At least, it was
+probably a better idea to make an abstraction of those communication ways like this:
+
+.. code-block:: javascript
+
+    var ws4redis = WS4Redis({
+        uri: '{{ WEBSOCKET_URI }}foobar?subscribe-user',
+        heartbeat_msg: {{ WS4REDIS_HEARTBEAT }}
+    });
+
+    function sendMessage() {
+        ws4redis.emit('chat', {
+            user: 'john',
+            message: 'My message'
+        });
+    }
+
+    ws4redis.on('chat', function(data) {
+        // data.user == 'john'
+        // data.message == 'My message'
+    });
+
+For an obscure reason, I had to rewrite the `WS4Redis javascript library <https://github.com/jrief/django-websocket-
+redis/blob/master/ws4redis/static/js/ws4redis.js>`_ for a `cleaner and functional version <https://github.com/Kocal/
+django-test-websockets/blob/5ac7a150dad75330d33e496c9e6d239ef143f111/myapp/static/myapp/js/ws4redis.js>`_,
+so implement an abstraction to have a beautiful thing should not be too hard I guess.
+
+Server side
+```````````
+Always with our example of chat, the server side implementation is in the `views.py <chatserver/views.py>`_ file, and it looks like this:
 
 .. code-block:: python
 
-    # example
+    class UserChatView(TemplateView):
+
+        # ...
+
+        #1: This method is called when sendMessage() function from client side is called
+        def post(self, request, *args, **kwargs):
+            #2: Create a RedisPublisher for the bucket "foobar", and only for the user passed in POST datas
+            redis_publisher = RedisPublisher(facility='foobar', users=[request.POST.get('user')])
+            #3: We make a RedisMessage (wrapping class), where it will send the message passed in  POST datas
+            message = RedisMessage(request.POST.get('message'))
+            #4: It publish the message to the bucket "foobar" and to the user
+            redis_publisher.publish_message(message)
+            #5: Everything is fine ;-)
+            return HttpResponse('OK')
+
+
+//TODO: I stopped there
+
 
 Documentation
 -------------
