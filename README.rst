@@ -341,7 +341,7 @@ py33-django18
 `````````````
 Web server works?
 '''''''''''''''''
-    **✗ Passed!**
+    **✓ Passed!**
 
 Output
 ......
@@ -391,7 +391,7 @@ py34-django18
 `````````````
 Web server works?
 '''''''''''''''''
-    **✗ Passed!**
+    **✓ Passed!**
 
 Output
 ......
@@ -721,7 +721,7 @@ I don't know if the following code works, but it's an approximate idea of what I
 
         def __init__(self):
             # ...
-            
+
             # Python anonymous function and multi-lines ;-)
             self.on('connect', self.on_connect)
             self.on('close', self.on_close)
