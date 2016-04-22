@@ -7,7 +7,6 @@
 
 Tests for django-websocket-redis_
 =================================
-
 - GitHub repo: https://github.com/jrief/django-websocket-redis
 - Documentation: http://django-websocket-redis.readthedocs.org/en/latest/
 
@@ -19,8 +18,6 @@ Summary
 -------
 Compatibility with Python and Django
 ````````````````````````````````````
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
-
 ============  ==========  ================  =================  ==============  ==============
 Python        Django      More details      Web server works?  Channels work?  Does it work?
 ============  ==========  ================  =================  ==============  ==============
@@ -54,7 +51,7 @@ Read more at `Architecture`_.
 
 Event-driven programming?
 `````````````````````````
-No, it uses AJAX to send datas to the server, but it uses Websocket to receive datas from the server.
+No, but it can make it like event-driven I guess.
 
 Read more at `Event-driven programming`_.
 
@@ -66,7 +63,7 @@ Read more at `Documentation`_.
 
 Has unit tests?
 ```````````````
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+Yes.
 
 Read more at `Unit tests`_.
 
@@ -753,4 +750,5 @@ Yes, a documentation is available for django-websocket-redis_ at `this address <
 
 Unit tests
 ----------
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+Yes, there are unit tests but also stress tests for `a simple chat server <http://django-websocket-redis.readthedocs.org/en/latest/testing.html
+#a-simple-chat-server>`_.
