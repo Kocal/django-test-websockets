@@ -96,11 +96,12 @@ To check if Redis is up and accepting connections, run:
 
 Integration
 -----------
-*For more information, you can take a look to the* `Configuration section <http://django-websocket-redis.readthedocs.org/en/latest/
-installation.html#configuration>`_ *from the official documentation.*
+*For more information, you can take a look to the* `Configuration section <http://django-websocket-redis.readthedocs.
+org/en/latest/installation.html#configuration>`_ *from the official documentation.*
 
 Instead of configure my own Django project, I will use the official demo (`chatserver <https://github.com/jrief/django-
-websocket-redis/tree/master/examples/chatserver>`_) during my tests with Tox to test django-websocket-redis_, because I'm lazy.
+websocket-redis/tree/master/examples/chatserver>`_) during my tests with Tox to test django-websocket-redis_, because
+I'm lazy.
 
 If you really want to configure for your project, here are some settings below:
 
@@ -624,7 +625,7 @@ Client side
 ```````````
 For example, take a look to the `user_chat.html <chatserver/templates/user_chat.html>`_ file from the official demo:
 
-.. code-block:: javascript+django
+.. code-block:: javascript
 
     var ws4redis = WS4Redis({
         uri: '{{ WEBSOCKET_URI }}foobar?subscribe-user',
@@ -658,13 +659,13 @@ probably a better idea to make an abstraction of those communication ways like t
     function sendMessage() {
         ws4redis.emit('chat', {
             user: 'john',
-            message: 'My message'
+            message: 'Hi Paul'
         });
     }
 
-    ws4redis.on('chat', function(data) {
-        // data.user == 'john'
-        // data.message == 'My message'
+    ws4redis.on('message', function(data) {
+        // data.user == 'paul'
+        // data.message == 'Hey John'
     });
 
 For an obscure reason, I had to rewrite the `WS4Redis javascript library <https://github.com/jrief/django-websocket-
@@ -674,7 +675,8 @@ so implement an abstraction to have a beautiful thing should not be too hard I g
 
 Server side
 ```````````
-Always with our example of chat, the server side implementation is in the `views.py <chatserver/views.py>`_ file, and it looks like this:
+Always with our example of chat, the server side implementation is in the `views.py <chatserver/views.py>`_ file, and
+it looks like this:
 
 .. code-block:: python
 
@@ -686,15 +688,63 @@ Always with our example of chat, the server side implementation is in the `views
         def post(self, request, *args, **kwargs):
             #2: Create a RedisPublisher for the bucket "foobar", and only for the user passed in POST datas
             redis_publisher = RedisPublisher(facility='foobar', users=[request.POST.get('user')])
-            #3: We make a RedisMessage (wrapping class), where it will send the message passed in  POST datas
+            #3: We make a RedisMessage (wrapping class), which contains the message passed in POST datas
             message = RedisMessage(request.POST.get('message'))
             #4: It publish the message to the bucket "foobar" and to the user
             redis_publisher.publish_message(message)
             #5: Everything is fine ;-)
             return HttpResponse('OK')
 
+Same problem than `Client side`_, here we do not write events to read and write from and to the web socket.
+We read data from the ``POST request``, and send data with a ``RedisPublisher``.
 
-//TODO: I stopped there
+A better way is to make again an abstraction to hide those parts and to looks like SocketIO.
+I don't know if the following code works, but it's an approximate idea of what I want to do:
+
+.. code-block:: python
+
+    # General websocket class which extends from Thread
+    class WebSocket(Thread, request):
+
+        def __init__(self):
+            # ...
+            self.broadcast = #...
+            self.events = {}
+
+        def on(self, event, cb):
+            self.events[event] = cb
+
+        # ...
+
+    # Specific websocket class for a chat
+    class WebSocketForChat(WebSocket, request):
+
+        def __init__(self):
+            # ...
+            
+            # Python anonymous function and multi-lines ;-)
+            self.on('connect', self.on_connect)
+            self.on('close', self.on_close)
+            self.on('chat', self.on_chat)
+
+        def on_connect(self):
+            print('Got a new connection')
+
+        def on_close(self):
+            print('Closed connection')
+
+        def on_chat(self, data):
+            self.broadcast.emit('message', {
+                user: data.user,
+                message: data.message
+            })
+
+    class UserChatView(TemplateView):
+
+        # Always called with Ajax...
+        def post(self, request, *args, **kwargs):
+                WebSocketForChat(request).run()
+
 
 
 Documentation
