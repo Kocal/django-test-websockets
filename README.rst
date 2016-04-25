@@ -683,12 +683,16 @@ it looks like this:
 
         #1: This method is called when sendMessage() function from client side is called
         def post(self, request, *args, **kwargs):
+
             #2: Create a RedisPublisher for the bucket "foobar", and only for the user passed in POST datas
             redis_publisher = RedisPublisher(facility='foobar', users=[request.POST.get('user')])
+
             #3: We make a RedisMessage (wrapping class), which contains the message passed in POST datas
             message = RedisMessage(request.POST.get('message'))
+
             #4: It publish the message to the bucket "foobar" and to the user
             redis_publisher.publish_message(message)
+
             #5: Everything is fine ;-)
             return HttpResponse('OK')
 
@@ -702,38 +706,33 @@ I don't know if the following code works, but it's an approximate idea of what I
 
     # General websocket class which extends from Thread
     class WebSocket(Thread, request):
-
-        def __init__(self):
-            # ...
-            self.broadcast = #...
-            self.events = {}
-
-        def on(self, event, cb):
-            self.events[event] = cb
-
         # ...
 
     # Specific websocket class for a chat
     class WebSocketForChat(WebSocket, request):
 
+        username = ''
+
         def __init__(self):
-            # ...
+            self.username = request.POST.get('username', 'anonymous')
 
-            # Python anonymous function and multi-lines ;-)
-            self.on('connect', self.on_connect)
-            self.on('close', self.on_close)
-            self.on('chat', self.on_chat)
-
+        @on('connect')
         def on_connect(self):
-            print('Got a new connection')
+            self.broadcast.emit('connect', {
+                'message': '%s just joining the chat' % self.username
+            })
 
+        @on('close')
         def on_close(self):
-            print('Closed connection')
+            self.broadcast.emit('close', {
+                'message': '%s just leave the chat' % self.username
+            })
 
+        @on('chat')
         def on_chat(self, data):
             self.broadcast.emit('message', {
-                user: data.user,
-                message: data.message
+                'user': data.get('user'),
+                'message': data.get('message')
             })
 
     class UserChatView(TemplateView):
