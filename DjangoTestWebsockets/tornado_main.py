@@ -13,6 +13,8 @@ import tornado.httpserver
 import tornado.ioloop
 import tornado.web
 import tornado.wsgi
+import tornado.websocket
+import hellowebsocket
 
 if django.VERSION[1] > 5:
     django.setup()
@@ -22,7 +24,38 @@ define('port', type=int, default=8080)
 
 class HelloHandler(tornado.web.RequestHandler):
     def get(self):
-        self.write('Hello from tornado')
+
+        # disgusting sorry, but too lazy to work with templates
+        self.write(
+            """
+            <!DOCTYPE html><html><body>
+            <h1>Hello from tornado!</h1>
+            <form name="send">
+                <input id="msg">
+                <input type="submit" value="Send">
+            </form>
+
+            <script>
+               var ws = new WebSocket("ws://127.0.0.1:8080/ws/hello-tornado");
+               var $form = document.querySelector('form[name="send"]');
+               var $msg = document.querySelector('input#msg');
+
+               ws.onopen = function() {
+                  ws.send("Hello, world");
+
+                  $form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    ws.send($msg.value);
+                  }, false);
+               };
+
+               ws.onmessage = function (evt) {
+                  alert("Response from server: " + evt.data);
+               };
+            </script>
+            </body></html>
+            """
+        )
 
 
 def main():
@@ -31,6 +64,7 @@ def main():
 
     tornado_app = tornado.web.Application([
         ('/hello-tornado', HelloHandler),
+        ('/ws/hello-tornado', hellowebsocket.HelloWebSocket),
         ('.*', tornado.web.FallbackHandler, dict(fallback=wsgi_app)),
     ])
 
