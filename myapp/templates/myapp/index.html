@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Chat</title>
+
+</head>
+<body>
+<form action="" name="chat">
+    <input type="text" name="message">
+    <input type="button" value="Send">
+</form>
+
+<h1>Messages</h1>
+<ul id="messages"></ul>
+
+<script src="{% static 'myapp/js/socket.io.js' %}"></script>
+<script>
+    var socket = io.connect('/chat')
+</script>
+</body>

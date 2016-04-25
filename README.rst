@@ -71,7 +71,7 @@ Installation
 
     $ mkvirtualenv --python=/usr/bin/python2.7 dtws-gevent-socketio
     # You are now in your new virtual environment
-    $ pip install Django tox gevent-socketio
+    $ pip install Django tox gevent-socketio==0.3.6
 
 You should modify the file `<your_virtual_env>/local/lib/pythonX.X/site-packages/socketio/handler.py` at line ~77,
 and change:
