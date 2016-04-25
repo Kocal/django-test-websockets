@@ -8,6 +8,9 @@
 
 Tests for django-socketio_
 ==========================
+
+    //TODO: I will probably rework this branch
+
 .. contents::
     :depth: 2
     :backlinks: none
