@@ -1,11 +1,11 @@
 .. _Tornado: https://github.com/tornadoweb/tornado
+.. _tornado_main.py: https://github.com/bdarnell/django-tornado-demo/blob/master/testsite/tornado_main.py
 
 Tests for Tornado_
 ==================
 
 - GitHub repo: https://github.com/tornadoweb/tornado
 - ReadTheDoc: http://www.tornadoweb.org/en/stable
-
 
 .. contents::
     :depth: 2
@@ -32,13 +32,13 @@ Python 3.5    Django 1.9  `py35-django19`_   ✓ Yes or ✗ No   ✓ Yes or ✗ 
 
 Easy to install?
 ````````````````
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+Easy.
 
 Read more at `Installation`_.
 
 Integration into a Django project
 `````````````````````````````````
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+Easy, we just need to wrap Django `WSGIHandler` into a Tornado `WSGIContainer`, make a route for it and it works fine.
 
 Read more at `Integration`_.
 
@@ -70,7 +70,7 @@ Read more at `Unit tests`_.
 
 Installation
 ------------
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+You can read the `official documentation <http://www.tornadoweb.org/en/stable/index.html#installation>`_ too.
 
 .. code-block:: bash
 
@@ -82,6 +82,24 @@ Numquam honeste facimus causa facimus ab non honestissime se insectarique sit de
 
 Integration
 -----------
+To use *Django* with *Tornado*, you can download and modify the file tornado_main.py_ (thanks to Ben Darnell <3)
+depending on your use.
+
+The most important parts of this file are:
+
+- We have two routes: ``/hello-tornado`` and ``.*``,
+- We have two handlers: ``HelloHandler`` (for *Tornado*) and ``django.core.handlers.wsgi.WSGIHandler`` (for *Django*),
+- Our two routes are respectively binded to our two handlers:
+
+    - When a client make a request for ``^/hello-tornado$``, ``HelloHandler`` will pick up the burden,
+    - Otherwise, as long as ``^.*$`` matches all requests, it's used as a fallback for all other requests that will be passed to *Django*.
+
+To run the server, run:
+
+.. code-block:: bash
+
+    $ # Always in your virtual environment at your project root
+    $ PYTHONPATH=. DJANGO_SETTINGS_MODULE=DjangoTestWebsockets.settings DjangoTestWebsockets/tornado_main.py
 
 Compatibility
 -------------
