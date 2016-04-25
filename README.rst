@@ -103,6 +103,7 @@ To run the server, run:
 
 Compatibility
 -------------
+To lurk moar, you can read the official documentation about `Tornado WebSocket <http://www.tornadoweb.org/en/stable/websocket.html>`_.
 
 Test compatibility with different version of Python and Django
 ``````````````````````````````````````````````````````````````
