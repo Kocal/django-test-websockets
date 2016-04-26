@@ -8,8 +8,11 @@ __pycache__/
 # C extensions
 *.so
 
+/static
+/django-polls
 # Distribution / packaging
 .Python
+/db.sqlite3
 env/
 build/
 develop-eggs/
