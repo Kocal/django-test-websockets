@@ -103,12 +103,6 @@ To run the server, run:
 
 Also, I will use my own `django polls app <https://github.com/Kocal/django-polls>`_ to see if Django works fine.
 
-.. figure:: benchmarks/benchmark.png
-    :align: center
-    :alt: Some Tornado benchmarks with Python 2.7 and Django 1.8
-
-    Benchmarks with Python 2.7 and Django 1.8
-
 Compatibility
 -------------
 Test compatibility with different version of Python and Django
@@ -147,6 +141,10 @@ My polls app works fine::
     [I 160426 08:12:38 wsgi:355] 200 GET /polls/4/results/ (127.0.0.1) 21.54ms
     [I 160426 08:12:41 wsgi:355] 200 GET /polls/ (127.0.0.1) 16.15ms
 
+Benchmark
+.........
+.. image:: benchmarks/py27-django18/benchmark.png
+
 py27-django19
 `````````````
 Tornado.websocket
@@ -170,6 +168,10 @@ My polls app works fine::
     [I 160426 08:18:35 wsgi:355] 200 GET /polls/4/results/ (127.0.0.1) 18.62ms
     [I 160426 08:18:37 wsgi:355] 200 GET /polls/4/ (127.0.0.1) 16.57ms
     [I 160426 08:18:38 wsgi:355] 200 GET /polls/ (127.0.0.1) 13.90ms
+
+Benchmark
+.........
+.. image:: benchmarks/py27-django19/benchmark.png
 
 py32-django18
 `````````````
@@ -199,6 +201,10 @@ My polls app works fine::
     [I 160426 08:58:14 wsgi:355] 302 POST /polls/4/vote/ (127.0.0.1) 151.73ms
     [I 160426 08:58:15 wsgi:355] 200 GET /polls/4/results/ (127.0.0.1) 33.81ms
 
+Benchmark
+.........
+.. image:: benchmarks/py33-django18/benchmark.png
+
 py34-django18
 `````````````
 Tornado.websocket
@@ -220,6 +226,10 @@ My polls app works fine::
     [I 160426 09:00:33 wsgi:355] 200 GET /polls/4/ (127.0.0.1) 16.65ms
     [I 160426 09:00:35 wsgi:355] 302 POST /polls/4/vote/ (127.0.0.1) 138.02ms
     [I 160426 09:00:35 wsgi:355] 200 GET /polls/4/results/ (127.0.0.1) 43.93ms
+
+Benchmark
+.........
+.. image:: benchmarks/py34-django18/benchmark.png
 
 py34-django19
 `````````````
@@ -244,6 +254,10 @@ My polls app works fine::
     [I 160426 09:22:01 wsgi:355] 302 POST /polls/4/vote/ (127.0.0.1) 147.77ms
     [I 160426 09:22:01 wsgi:355] 200 GET /polls/4/results/ (127.0.0.1) 19.95ms
 
+Benchmark
+.........
+.. image:: benchmarks/py34-django19/benchmark.png
+
 py35-django18
 `````````````
 Tornado.websocket
@@ -266,6 +280,10 @@ It works::
     [I 160426 09:24:23 wsgi:355] 200 GET /polls/4/results/ (127.0.0.1) 28.34ms
     [I 160426 09:24:24 wsgi:355] 200 GET /polls/ (127.0.0.1) 23.20ms
 
+Benchmark
+.........
+.. image:: benchmarks/py35-django18/benchmark.png
+
 py35-django19
 `````````````
 Tornado.websocket
@@ -287,6 +305,10 @@ It works::
     [I 160426 09:29:24 wsgi:355] 302 POST /polls/4/vote/ (127.0.0.1) 134.89ms
     [I 160426 09:29:24 wsgi:355] 200 GET /polls/4/results/ (127.0.0.1) 17.95ms
     [I 160426 09:29:24 wsgi:355] 200 GET /polls/ (127.0.0.1) 28.57ms
+
+Benchmark
+.........
+.. image:: benchmarks/py35-django19/benchmark.png
 
 Architecture
 ------------
