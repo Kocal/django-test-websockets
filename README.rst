@@ -38,31 +38,31 @@ Read more at `Installation`_.
 
 Integration into a Django project
 `````````````````````````````````
-Easy, we just need to wrap Django `WSGIHandler` into a Tornado `WSGIContainer`, make a route for it and it works fine.
+Easy, we just need to wrap Django into a Tornado `WSGIContainer`, make a route for it and it works fine.
 
 Read more at `Integration`_.
 
 Thin or heavy architecture?
 ```````````````````````````
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+Both, Tornado_ can be a web framework and an HTTP server at the same time.
 
 Read more at `Architecture`_.
 
 Event-driven programming?
 `````````````````````````
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+No, but I can make it like event-driven I guess.
 
 Read more at `Event-driven programming`_.
 
 Has a documentation?
 ````````````````````
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+Yes.
 
 Read more at `Documentation`_.
 
 Has unit tests?
 ```````````````
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+Yes.
 
 Read more at `Unit tests`_.
 
@@ -312,16 +312,24 @@ Benchmark
 
 Architecture
 ------------
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+To use Tornado websockets with Django, you should run a Tornado server which wraps:
+
+- A websocket handler (search for ``myapp.hellowebsocket.HelloWebSocket``)
+- *Django*'s *WSGIHandler* into a *Tornado*'s *WSGIContainer*
+
+Tornado is an alternative to `WSGI <https://www.python.org/dev/peps/pep-3333/>`_, so Python webservers like *Gunicorn*,
+*uWSGI*, ... can not be used.
 
 Event-driven programming
 ------------------------
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+No, but I already wrote something about this for `django-websocket-redis <https://github.com/Kocal/django-test-websocket
+s/tree/django-websocket-redis#event-driven-programming-1>`_, to see how I can implement an even-driver programming way
+for both server and client side.
 
 Documentation
 -------------
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+Yes, a nice written one: `this address <http://www.tornadoweb.org/en/stable/guide.html>`__.
 
 Unit tests
 ----------
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+Yes, at `this address <https://github.com/tornadoweb/tornado/tree/master/tornado/test>`__.
