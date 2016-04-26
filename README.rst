@@ -23,11 +23,11 @@ Python        Django      More details      Websocket works?  Django works?  So,
 Python 2.7    Django 1.8  `py27-django18`_   ✓ Yes            ✓ Yes          **✓ Yes**
 Python 2.7    Django 1.9  `py27-django19`_   ✓ Yes            ✓ Yes          **✓ Yes**
 Python 3.2    Django 1.8  `py32-django18`_   ─ Maybe yes      ─ Maybe yes    **─ Maybe yes**
-Python 3.3    Django 1.8  `py33-django18`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
-Python 3.4    Django 1.8  `py34-django18`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
-Python 3.4    Django 1.9  `py34-django19`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
-Python 3.5    Django 1.8  `py35-django18`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
-Python 3.5    Django 1.9  `py35-django19`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
+Python 3.3    Django 1.8  `py33-django18`_   ✓ Yes            ✓ Yes          **✓ Yes**
+Python 3.4    Django 1.8  `py34-django18`_   ✓ Yes            ✓ Yes          **✓ Yes**
+Python 3.4    Django 1.9  `py34-django19`_   ✓ Yes            ✓ Yes          **✓ Yes**
+Python 3.5    Django 1.8  `py35-django18`_   ✓ Yes            ✓ Yes          **✓ Yes**
+Python 3.5    Django 1.9  `py35-django19`_   ✓ Yes            ✓ Yes          **✓ Yes**
 ============  ==========  ================  ================  =============  =================
 
 Easy to install?
@@ -101,8 +101,7 @@ To run the server, run:
     $ # Always in your virtual environment at your project root
     $ PYTHONPATH=. DJANGO_SETTINGS_MODULE=DjangoTestWebsockets.settings DjangoTestWebsockets/tornado_main.py
 
-Also, I will use my own `django polls app <https://github.com/Kocal/django-polls>`_ to see if Django (polls app and
-administration dashboard) works fine.
+Also, I will use my own `django polls app <https://github.com/Kocal/django-polls>`_ to see if Django works fine.
 
 Compatibility
 -------------
@@ -136,7 +135,7 @@ The communication between the client and the server works fine::
 
 Django
 ......
-My polls app works fine and the administration dashboard too::
+My polls app works fine::
 
     [I 160426 08:12:33 wsgi:355] 200 GET /polls/ (127.0.0.1) 210.89ms
     [I 160426 08:12:35 wsgi:355] 200 GET /polls/4/ (127.0.0.1) 40.09ms
@@ -158,7 +157,7 @@ The communication between the client and the server works fine::
 
 Django
 ......
-My polls app works fine and the administration dashboard too::
+My polls app works fine::
 
     [I 160426 08:18:29 wsgi:355] 200 GET /polls/ (127.0.0.1) 45.67ms
     [I 160426 08:18:29 web:1946] 304 GET /static/polls/style.css (127.0.0.1) 13.69ms
@@ -176,50 +175,114 @@ py33-django18
 `````````````
 Tornado.websocket
 .................
+The communication between the client and the server works fine::
+
+    Tornado server started on port 8080
+    [I 160426 08:56:22 web:1946] 304 GET /hello-tornado (127.0.0.1) 1.73ms
+    WebSocket opened
+    Someone said: Hello, world
+    Someone said: Hello for py 33 django 18
+    WebSocket closed
 
 Django
 ......
+My polls app works fine::
+
+    [I 160426 08:58:09 wsgi:355] 200 GET /polls/ (127.0.0.1) 244.26ms
+    [I 160426 08:58:10 web:1946] 304 GET /static/polls/style.css (127.0.0.1) 25.54ms
+    [I 160426 08:58:10 web:1946] 304 GET /static/polls/images/background.jpg (127.0.0.1) 2.47ms
+    [I 160426 08:58:12 wsgi:355] 200 GET /polls/4/ (127.0.0.1) 51.47ms
+    [I 160426 08:58:14 wsgi:355] 302 POST /polls/4/vote/ (127.0.0.1) 151.73ms
+    [I 160426 08:58:15 wsgi:355] 200 GET /polls/4/results/ (127.0.0.1) 33.81ms
 
 py34-django18
 `````````````
 Tornado.websocket
 .................
+The communication between the client and the server works fine::
+
+    WebSocket opened
+    Someone said: Hello, world
+    Someone said: Hello for py 34 django 18
+    WebSocket closed
 
 Django
 ......
+My polls app works fine::
 
-py33-django19
-`````````````
-Tornado.websocket
-.................
-
-Django
-......
+    Tornado server started on port 8080
+    [I 160426 09:00:28 wsgi:355] 200 GET /polls/4/ (127.0.0.1) 78.70ms
+    [I 160426 09:00:32 wsgi:355] 200 GET /polls/ (127.0.0.1) 13.07ms
+    [I 160426 09:00:33 wsgi:355] 200 GET /polls/4/ (127.0.0.1) 16.65ms
+    [I 160426 09:00:35 wsgi:355] 302 POST /polls/4/vote/ (127.0.0.1) 138.02ms
+    [I 160426 09:00:35 wsgi:355] 200 GET /polls/4/results/ (127.0.0.1) 43.93ms
 
 py34-django19
 `````````````
 Tornado.websocket
 .................
+The communication between the client and the server works fine::
+
+    [I 160426 09:22:22 web:1946] 304 GET /hello-tornado (127.0.0.1) 0.76ms
+    WebSocket opened
+    Someone said: Hello, world
+    Someone said: Hello for py 34 django 19
+    WebSocket closed
 
 Django
 ......
+My polls app works fine::
+
+    Tornado server started on port 8080
+    [I 160426 09:21:55 wsgi:355] 200 GET /polls/ (127.0.0.1) 396.51ms
+    [I 160426 09:21:55 web:1946] 304 GET /static/polls/style.css (127.0.0.1) 8.13ms
+    [I 160426 09:21:59 wsgi:355] 200 GET /polls/4/ (127.0.0.1) 68.36ms
+    [I 160426 09:22:01 wsgi:355] 302 POST /polls/4/vote/ (127.0.0.1) 147.77ms
+    [I 160426 09:22:01 wsgi:355] 200 GET /polls/4/results/ (127.0.0.1) 19.95ms
 
 py35-django18
 `````````````
 Tornado.websocket
 .................
+It works::
+
+    WebSocket opened
+    Someone said: Hello, world
+    Someone said: Hello for py 35 django 18
+    WebSocket closed
 
 Django
 ......
+It works::
+
+    Tornado server started on port 8080
+    [I 160426 09:24:19 wsgi:355] 200 GET /polls/ (127.0.0.1) 85.62ms
+    [I 160426 09:24:21 wsgi:355] 200 GET /polls/4/ (127.0.0.1) 24.46ms
+    [I 160426 09:24:23 wsgi:355] 302 POST /polls/4/vote/ (127.0.0.1) 172.08ms
+    [I 160426 09:24:23 wsgi:355] 200 GET /polls/4/results/ (127.0.0.1) 28.34ms
+    [I 160426 09:24:24 wsgi:355] 200 GET /polls/ (127.0.0.1) 23.20ms
 
 py35-django19
 `````````````
 Tornado.websocket
 .................
+It works::
+
+    WebSocket opened
+    Someone said: Hello, world
+    Someone said: Hello for py 35 django 19
+    WebSocket closed
 
 Django
 ......
+It works::
 
+    Tornado server started on port 8080
+    [I 160426 09:29:21 wsgi:355] 200 GET /polls/ (127.0.0.1) 53.86ms
+    [I 160426 09:29:22 wsgi:355] 200 GET /polls/4/ (127.0.0.1) 18.21ms
+    [I 160426 09:29:24 wsgi:355] 302 POST /polls/4/vote/ (127.0.0.1) 134.89ms
+    [I 160426 09:29:24 wsgi:355] 200 GET /polls/4/results/ (127.0.0.1) 17.95ms
+    [I 160426 09:29:24 wsgi:355] 200 GET /polls/ (127.0.0.1) 28.57ms
 
 Architecture
 ------------
