@@ -17,18 +17,18 @@ Compatibility with Python and Django
 ````````````````````````````````````
 Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
 
-============  ==========  ================  ===============  ===============  ================
-Python        Django      More details      Thing #1 works?  Thing #2 works?  So, does it work?
-============  ==========  ================  ===============  ===============  ================
-Python 2.7    Django 1.8  `py27-django18`_   ✓ Yes or ✗ No   ✓ Yes or ✗ No    **✓ Yes/✗ No**
-Python 2.7    Django 1.9  `py27-django19`_   ✓ Yes or ✗ No   ✓ Yes or ✗ No    **✓ Yes/✗ No**
-Python 3.2    Django 1.8  `py32-django18`_   ✓ Yes or ✗ No   ✓ Yes or ✗ No    **✓ Yes/✗ No**
-Python 3.3    Django 1.8  `py33-django18`_   ✓ Yes or ✗ No   ✓ Yes or ✗ No    **✓ Yes/✗ No**
-Python 3.4    Django 1.8  `py34-django18`_   ✓ Yes or ✗ No   ✓ Yes or ✗ No    **✓ Yes/✗ No**
-Python 3.4    Django 1.9  `py34-django19`_   ✓ Yes or ✗ No   ✓ Yes or ✗ No    **✓ Yes/✗ No**
-Python 3.5    Django 1.8  `py35-django18`_   ✓ Yes or ✗ No   ✓ Yes or ✗ No    **✓ Yes/✗ No**
-Python 3.5    Django 1.9  `py35-django19`_   ✓ Yes or ✗ No   ✓ Yes or ✗ No    **✓ Yes/✗ No**
-============  ==========  ================  ===============  ===============  ================
+============  ==========  ================  ================  =============  =================
+Python        Django      More details      Websocket works?  Django works?  So, does it work?
+============  ==========  ================  ================  =============  =================
+Python 2.7    Django 1.8  `py27-django18`_   ✓ Yes            ✓ Yes          **✓ Yes**
+Python 2.7    Django 1.9  `py27-django19`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
+Python 3.2    Django 1.8  `py32-django18`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
+Python 3.3    Django 1.8  `py33-django18`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
+Python 3.4    Django 1.8  `py34-django18`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
+Python 3.4    Django 1.9  `py34-django19`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
+Python 3.5    Django 1.8  `py35-django18`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
+Python 3.5    Django 1.9  `py35-django19`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
+============  ==========  ================  ================  =============  =================
 
 Easy to install?
 ````````````````
@@ -101,6 +101,9 @@ To run the server, run:
     $ # Always in your virtual environment at your project root
     $ PYTHONPATH=. DJANGO_SETTINGS_MODULE=DjangoTestWebsockets.settings DjangoTestWebsockets/tornado_main.py
 
+Also, I will use my own `django polls app <https://github.com/Kocal/django-polls>`_ to see if Django (polls app and
+administration dashboard) works fine.
+
 Compatibility
 -------------
 To lurk moar, you can read the official documentation about `Tornado WebSocket <http://www.tornadoweb.org/en/stable/websocket.html>`_.
@@ -121,6 +124,24 @@ To run a specific test, run for example:
 
 py27-django18
 `````````````
+Tornado.websocket
+.................
+Works fine, I can send messages to the websocket server and it answered me.
+
+    WebSocket opened
+    Someone said: Hello, world
+    Someone said: TEst for Python 2.7 and Django 1.8
+    WebSocket closed
+
+Django
+......
+My polls app works fine, and the administration dashboard too.
+
+    [I 160426 08:12:33 wsgi:355] 200 GET /polls/ (127.0.0.1) 210.89ms
+    [I 160426 08:12:35 wsgi:355] 200 GET /polls/4/ (127.0.0.1) 40.09ms
+    [I 160426 08:12:37 wsgi:355] 302 POST /polls/4/vote/ (127.0.0.1) 119.37ms
+    [I 160426 08:12:38 wsgi:355] 200 GET /polls/4/results/ (127.0.0.1) 21.54ms
+    [I 160426 08:12:41 wsgi:355] 200 GET /polls/ (127.0.0.1) 16.15ms
 
 py27-django19
 `````````````
