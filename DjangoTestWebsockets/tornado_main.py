@@ -7,14 +7,15 @@
 # http://localhost:8080/hello-django
 
 
-from tornado.options import options, define, parse_command_line
 import django.core.handlers.wsgi
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
-import tornado.wsgi
 import tornado.websocket
-import hellowebsocket
+import tornado.wsgi
+from tornado.options import options, define, parse_command_line
+
+from myapp import hellowebsocket
 
 if django.VERSION[1] > 5:
     django.setup()
@@ -25,7 +26,6 @@ define('port', type=int, default=8080)
 class HelloHandler(tornado.web.RequestHandler):
     def get(self):
 
-        # disgusting sorry, but too lazy to work with templates
         self.write(
             """
             <!DOCTYPE html><html><body>
@@ -70,8 +70,10 @@ def main():
 
     server = tornado.httpserver.HTTPServer(tornado_app)
     server.listen(options.port)
-    tornado.ioloop.IOLoop.instance().start()
 
+    print("Tornado server started on port %s" % options.port)
+
+    tornado.ioloop.IOLoop.instance().start()
 
 if __name__ == '__main__':
     main()
