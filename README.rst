@@ -82,17 +82,17 @@ You can read the `official documentation <http://www.tornadoweb.org/en/stable/in
 
 Integration
 -----------
-To use *Django* with *Tornado*, you can download and modify the file tornado_main.py_ (thanks to Ben Darnell <3)
+To use *Django* with *Tornado*, you can download and modify the file tornado_main.py_ (thanks to Ben Darnell)
 depending on your use.
 
 The most important parts of this file are:
 
 - We have two routes: ``/hello-tornado`` and ``.*``,
 - We have two handlers: ``HelloHandler`` (for *Tornado*) and ``django.core.handlers.wsgi.WSGIHandler`` (for *Django*),
-- Our two routes are respectively binded to our two handlers:
+-  Our two routes are respectively binded to our two handlers:
 
-    - When a client make a request for ``^/hello-tornado$``, ``HelloHandler`` will pick up the burden,
-    - Otherwise, as long as ``^.*$`` matches all requests, it's used as a fallback for all other requests that will be passed to *Django*.
+   - When a client make a request for ``^/hello-tornado$``, ``HelloHandler`` will pick up the burden,
+   - Otherwise, as long as ``^.*$`` matches all requests, it's used as a fallback for all other requests that will be passed to *Django*.
 
 To run the server, run:
 
