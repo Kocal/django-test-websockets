@@ -103,10 +103,14 @@ To run the server, run:
 
 Also, I will use my own `django polls app <https://github.com/Kocal/django-polls>`_ to see if Django works fine.
 
+.. figure:: benchmarks/benchmark.png
+    :align: center
+    :alt: Some Tornado benchmarks with Python 2.7 and Django 1.8
+
+    Benchmarks with Python 2.7 and Django 1.8
+
 Compatibility
 -------------
-To lurk moar, you can read the official documentation about `Tornado WebSocket <http://www.tornadoweb.org/en/stable/websocket.html>`_.
-
 Test compatibility with different version of Python and Django
 ``````````````````````````````````````````````````````````````
 To list available tests, you can run:
