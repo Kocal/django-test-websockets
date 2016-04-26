@@ -21,8 +21,8 @@ Numquam honeste facimus causa facimus ab non honestissime se insectarique sit de
 Python        Django      More details      Websocket works?  Django works?  So, does it work?
 ============  ==========  ================  ================  =============  =================
 Python 2.7    Django 1.8  `py27-django18`_   ✓ Yes            ✓ Yes          **✓ Yes**
-Python 2.7    Django 1.9  `py27-django19`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
-Python 3.2    Django 1.8  `py32-django18`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
+Python 2.7    Django 1.9  `py27-django19`_   ✓ Yes            ✓ Yes          **✓ Yes**
+Python 3.2    Django 1.8  `py32-django18`_   ─ Maybe yes      ─ Maybe yes    **─ Maybe yes**
 Python 3.3    Django 1.8  `py33-django18`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
 Python 3.4    Django 1.8  `py34-django18`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
 Python 3.4    Django 1.9  `py34-django19`_   ✓ Yes or ✗ No    ✓ Yes or ✗ No  **✓ Yes/✗ No**
@@ -126,16 +126,17 @@ py27-django18
 `````````````
 Tornado.websocket
 .................
-Works fine, I can send messages to the websocket server and it answered me.
+The communication between the client and the server works fine::
 
+    [I 160426 08:11:21 web:1932] 304 GET /hello-tornado (127.0.0.1) 0.62ms
     WebSocket opened
     Someone said: Hello, world
-    Someone said: TEst for Python 2.7 and Django 1.8
+    Someone said: Test for Python 2.7 and Django 1.8
     WebSocket closed
 
 Django
 ......
-My polls app works fine, and the administration dashboard too.
+My polls app works fine and the administration dashboard too::
 
     [I 160426 08:12:33 wsgi:355] 200 GET /polls/ (127.0.0.1) 210.89ms
     [I 160426 08:12:35 wsgi:355] 200 GET /polls/4/ (127.0.0.1) 40.09ms
@@ -145,27 +146,80 @@ My polls app works fine, and the administration dashboard too.
 
 py27-django19
 `````````````
+Tornado.websocket
+.................
+The communication between the client and the server works fine::
+
+    [I 160426 08:21:14 web:1946] 304 GET /hello-tornado (127.0.0.1) 0.63ms
+    WebSocket opened
+    Someone said: Hello, world
+    Someone said: Test for Python 2.7 and Django 1.9
+    WebSocket closed
+
+Django
+......
+My polls app works fine and the administration dashboard too::
+
+    [I 160426 08:18:29 wsgi:355] 200 GET /polls/ (127.0.0.1) 45.67ms
+    [I 160426 08:18:29 web:1946] 304 GET /static/polls/style.css (127.0.0.1) 13.69ms
+    [I 160426 08:18:33 wsgi:355] 200 GET /polls/4/ (127.0.0.1) 19.17ms
+    [I 160426 08:18:35 wsgi:355] 302 POST /polls/4/vote/ (127.0.0.1) 121.51ms
+    [I 160426 08:18:35 wsgi:355] 200 GET /polls/4/results/ (127.0.0.1) 18.62ms
+    [I 160426 08:18:37 wsgi:355] 200 GET /polls/4/ (127.0.0.1) 16.57ms
+    [I 160426 08:18:38 wsgi:355] 200 GET /polls/ (127.0.0.1) 13.90ms
 
 py32-django18
 `````````````
+Does not work because Pip is broken with Python 3.2, but otherwise I'm sure it can works.
 
 py33-django18
 `````````````
+Tornado.websocket
+.................
+
+Django
+......
 
 py34-django18
 `````````````
+Tornado.websocket
+.................
+
+Django
+......
 
 py33-django19
 `````````````
+Tornado.websocket
+.................
+
+Django
+......
 
 py34-django19
 `````````````
+Tornado.websocket
+.................
+
+Django
+......
 
 py35-django18
 `````````````
+Tornado.websocket
+.................
+
+Django
+......
 
 py35-django19
 `````````````
+Tornado.websocket
+.................
+
+Django
+......
+
 
 Architecture
 ------------
