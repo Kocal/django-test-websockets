@@ -21,8 +21,8 @@ class BroadcastChatView(TemplateView):
     def get(self, request, *args, **kwargs):
         self.redis_publisher.publish_message(RedisMessage('Hello everybody'))
 
-        thread = Thread(target=self.thread_function, args=(10,))
-        thread.start()
+        # thread = Thread(target=self.thread_function, args=(10,))
+        # thread.start()
 
         return super(BroadcastChatView, self).get(request, *args, **kwargs)
 

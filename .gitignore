@@ -13,6 +13,7 @@
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
+/django-polls
 .idea/dataSources.xml
 .idea/dataSources.local.xml
 .idea/sqlDataSources.xml
