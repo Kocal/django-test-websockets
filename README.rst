@@ -245,6 +245,11 @@ Group user  John     chatusers  chatusers             **✓ Yes**
 Group user  Mary     chatusers  chatusers             **✓ Yes**
 ==========  =======  =========  ====================  ===============
 
+Benchmark
+'''''''''
+.. image:: benchmarks/py27-django18/benchmark.png
+    :alt: Benchmarks for Python 2.7 and Django 1.8
+
 py27-django19
 `````````````
 Web server works?
@@ -309,6 +314,11 @@ Group user  Admin    chatusers  chatusers             **✓ Yes**
 Group user  John     chatusers  chatusers             **✓ Yes**
 Group user  Mary     chatusers  chatusers             **✓ Yes**
 ==========  =======  =========  ====================  ===============
+
+Benchmark
+'''''''''
+.. image:: benchmarks/py27-django19/benchmark.png
+    :alt: Benchmarks for Python 2.7 and Django 1.9
 
 py32-django18
 `````````````
@@ -384,6 +394,11 @@ Group user  John     chatusers  chatusers             **✓ Yes**
 Group user  Mary     chatusers  chatusers             **✓ Yes**
 ==========  =======  =========  ====================  ===============
 
+Benchmark
+'''''''''
+.. image:: benchmarks/py33-django18/benchmark.png
+    :alt: Benchmarks for Python 3.3 and Django 1.8
+
 py34-django18
 `````````````
 Web server works?
@@ -433,6 +448,11 @@ Group user  Admin    chatusers  chatusers             **✓ Yes**
 Group user  John     chatusers  chatusers             **✓ Yes**
 Group user  Mary     chatusers  chatusers             **✓ Yes**
 ==========  =======  =========  ====================  ===============
+
+Benchmark
+'''''''''
+.. image:: benchmarks/py34-django18/benchmark.png
+    :alt: Benchmarks for Python 3.4 and Django 1.8
 
 py34-django19
 `````````````
@@ -496,6 +516,11 @@ Group user  John     chatusers  chatusers             **✓ Yes**
 Group user  Mary     chatusers  chatusers             **✓ Yes**
 ==========  =======  =========  ====================  ===============
 
+Benchmark
+'''''''''
+.. image:: benchmarks/py34-django19/benchmark.png
+    :alt: Benchmarks for Python 3.4 and Django 1.9
+
 py35-django18
 `````````````
 Web server works?
@@ -545,6 +570,11 @@ Group user  Admin    chatusers  chatusers             **✓ Yes**
 Group user  John     chatusers  chatusers             **✓ Yes**
 Group user  Mary     chatusers  chatusers             **✓ Yes**
 ==========  =======  =========  ====================  ===============
+
+Benchmark
+'''''''''
+.. image:: benchmarks/py35-django18/benchmark.png
+    :alt: Benchmarks for Python 3.5 and Django 1.8
 
 py35-django19
 `````````````
@@ -609,6 +639,11 @@ Group user  Admin    chatusers  chatusers             **✓ Yes**
 Group user  John     chatusers  chatusers             **✓ Yes**
 Group user  Mary     chatusers  chatusers             **✓ Yes**
 ==========  =======  =========  ====================  ===============
+
+Benchmark
+'''''''''
+.. image:: benchmarks/py35-django19/benchmark.png
+    :alt: Benchmarks for Python 3.5 and Django 1.9
 
 Architecture
 ------------
