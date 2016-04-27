@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 benchmark=-1
 
 benchmarks=(
@@ -58,10 +60,14 @@ plot "01-hello-tornado.txt" using 9 smooth sbezier with lines title "/hello-torn
      "03-django-admin.txt" using 9 smooth sbezier with lines title "/admin (Django)"
 EOF
 
+# ---
+
 echo "Starting benchmark $bench..."
-ab -k -n 50000 -c 100 -g "$bench_dir/01-hello-tornado.txt" http://127.0.0.1:8080/hello-tornado
-ab -k -n 50000 -c 100 -g "$bench_dir/02-django-polls.txt" http://127.0.0.1:8080/polls
-ab -k -n 50000 -c 100 -g "$bench_dir/03-django-admin.txt" http://127.0.0.1:8080/admin
+ab -k -n 2000 -c 100 -g "$bench_dir/01-hello-tornado.txt" http://127.0.0.1:8080/hello-tornado
+ab -k -n 2000 -c 100 -g "$bench_dir/02-django-polls.txt" http://127.0.0.1:8080/polls/
+ab -k -n 2000 -c 100 -g "$bench_dir/03-django-admin.txt" http://127.0.0.1:8080/admin/
+
+# ---
 
 echo "Running GNU Plot script..."
 gnuplot "$bench_dir/build.p"
