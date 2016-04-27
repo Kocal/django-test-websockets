@@ -9,12 +9,9 @@
 Tests for django-socketio_
 ==========================
 
-    //TODO: I will probably rework this branch
-
 .. contents::
     :depth: 2
     :backlinks: none
-
 
 Summary
 -------
@@ -27,10 +24,11 @@ Python        Django      More details      Django server works?  Websockets ser
 ============  ==========  ================  ====================  ========================  =============
 Python 2.7    Django 1.8  `py27-django18`_  ✓ Yes                 ✗ No                      ✗ **No**
 Python 2.7    Django 1.9  `py27-django19`_  ✗ No                  ✗ No                      ✗ **No**
+Python 3.2    Django 1.8  `py32-django18`_  ✗ No                  ✗ No                      ✗ **No**
 Python 3.3    Django 1.8  `py33-django18`_  ✗ No                  ✗ No                      ✗ **No**
 Python 3.3    Django 1.9  `py33-django19`_  ✗ No                  ✗ No                      ✗ **No**
-Python 3.4    Django 1.8  `py34-django18`_  ✗ No                  ✗ No                      ✗ **No**
 Python 3.4    Django 1.9  `py34-django19`_  ✗ No                  ✗ No                      ✗ **No**
+Python 3.5    Django 1.8  `py35-django18`_  ✗ No                  ✗ No                      ✗ **No**
 Python 3.5    Django 1.9  `py35-django19`_  ✗ No                  ✗ No                      ✗ **No**
 ============  ==========  ================  ====================  ========================  =============
 
@@ -182,144 +180,89 @@ To run a specific test, run for example:
 
 .. code-block:: bash
 
-    $ tox -e py27-django19
+    $ tox -e py27-django18
 
 py27-django18
 `````````````
-Coverage test
-'''''''''''''
-**✓ Passed!**
+Django server works?
+....................
 
-Output
-......
-.. code-block::
 
-    py27-django18 runtests: commands[0] | coverage run --source=DjangoTestWebsockets,myapp manage.py test
-    Creating test database for alias 'default'...
+Websockets server works?
+........................
 
-    ----------------------------------------------------------------------
-    Ran 0 tests in 0.000s
-
-    OK
-    Destroying test database for alias 'default'...
-
-Runserver test
-''''''''''''''
-**✓ Passed!**
-
-Output
-......
-.. code-block::
-
-    py27-django18 runtests: commands[1] | python manage.py runserver
-    Performing system checks...
-
-    System check identified no issues (0 silenced).
-    April 19, 2016 - 14:06:58
-    Django version 1.8.12, using settings 'DjangoTestWebsockets.settings'
-    Starting development server at http://127.0.0.1:8000/
-    Quit the server with CONTROL-C.
-
-py33-django18
-`````````````
-**✗ Failed.**
-
-For as long as ``Python 2.7`` and ``Python 3.x`` are incompatible, django-socketio_ will not be able to works with
-``Python 3.x``.
-Thus, a ``SyntaxError`` exception is raised and its cancel Tox tests.
-
-Installation output
-'''''''''''''''''''
-.. code-block::
-
-    Collecting django-socketio
-      Using cached django-socketio-0.3.9.tar.gz
-        Complete output from command python setup.py egg_info:
-        Traceback (most recent call last):
-          File "<string>", line 1, in <module>
-          File "/tmp/pip-build-i2wuah/django-socketio/setup.py", line 7, in <module>
-            version = __import__("django_socketio").__version__,
-          File "/tmp/pip-build-i2wuah/django-socketio/django_socketio/__init__.py", line 2, in <module>
-            from django_socketio.utils import NoSocket, send, broadcast, broadcast_channel
-          File "/tmp/pip-build-i2wuah/django-socketio/django_socketio/utils.py", line 44
-            except IndexError, KeyError:
-                             ^
-        SyntaxError: invalid syntax
-
-py34-django18
-`````````````
-**✗ Failed.**
-
-Read py33-django18_.
 
 py27-django19
 `````````````
-Coverage test
-'''''''''''''
-**✓ Passed!**
-
-Only works because tests are empty, but it will probably fails when tests will be written.
-
-Output
-......
-.. code-block::
-
-    py27-django19 runtests: commands[0] | coverage run --source=DjangoTestWebsockets,myapp manage.py test
-    Creating test database for alias 'default'...
-
-    ----------------------------------------------------------------------
-    Ran 0 tests in 0.000s
-
-    OK
-    Destroying test database for alias 'default'...
+Django server works?
+....................
 
 
-Runserver test
-''''''''''''''
-Failed, because ``django.utils.importlib`` was marked as deprecated in ``Django 1.7b1`` [#]_, then it was removed in
-``Django 1.9`` [#]_.
+Websockets server works?
+........................
 
-.. [#] https://github.com/django/django/commit/210d0489c5daad56b806f8165f9fe09fb3c2a019#diff-9046c2a231d3133a3dd89934a3b8b17eL7
-.. [#] https://docs.djangoproject.com/en/1.8/internals/deprecation/#deprecation-removed-in-1-9
 
-Output
-......
-.. code-block::
+py32-django18
+`````````````
+Django server works?
+....................
 
-    py27-django19 runtests: commands[1] | python manage.py runserver
-    Performing system checks...
 
-    Unhandled exception in thread started by <function wrapper at 0xb675c25c>
-    Traceback (most recent call last):
-      [...]
-      File "/home/hugo/Dev/DjangoTestWebsockets/DjangoTestWebsockets/urls.py", line 20, in <module>
-        url('', include('django_socketio.urls')),
-      File "/home/hugo/Dev/DjangoTestWebsockets/.tox/py27-django19/local/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 52, in include
-        urlconf_module = import_module(urlconf_module)
-      File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
-        __import__(name)
-      File "/home/hugo/Dev/DjangoTestWebsockets/.tox/py27-django19/local/lib/python2.7/site-packages/django_socketio/urls.py", line 4, in <module>
-        from django.utils.importlib import import_module
-    ImportError: No module named importlib
+Websockets server works?
+........................
+
+
+py33-django18
+`````````````
+Django server works?
+....................
+
+
+Websockets server works?
+........................
+
 
 py33-django19
 `````````````
-**✗ Failed.**
+Django server works?
+....................
 
-Read py33-django18_.
+
+Websockets server works?
+........................
+
 
 py34-django19
 `````````````
-**✗ Failed.**
+Django server works?
+....................
 
-Read py33-django18_.
+
+Websockets server works?
+........................
+
+
+py35-django18
+`````````````
+Django server works?
+....................
+
+
+Websockets server works?
+........................
 
 
 py35-django19
 `````````````
-**✗ Failed.**
+Django server works?
+....................
 
-Read py33-django18_.
+
+Websockets server works?
+........................
+
+
+
 
 Architecture
 ------------

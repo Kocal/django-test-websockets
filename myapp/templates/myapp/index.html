@@ -1,7 +1,34 @@
 {% load staticfiles %}
 
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Hello from tornado!</h1>
+<form name="send">
+    <input id="msg">
+    <input type="submit" value="Send">
+</form>
+
 <script src="{% static 'js/socket.io.js' %}"></script>
 <script>
-    var socket = new io.Socket('localhost', {port: 9000})
-    socket.connect()
+    var socket = new io.Socket('localhost', {port: 9000});
+    var $form = document.querySelector('form[name="send"]');
+    var $msg = document.querySelector('input#msg');
+
+    socket.connect();
+
+    socket.on('connect', function () {
+        socket.emit('message', 'Hello, world');
+
+        $form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            ws.send($msg.value);
+        }, false);
+    });
+
+    socket.on('message', function (data) {
+        console.log("Response from server: ", data);
+    });
 </script>
+</body>
+</html>
