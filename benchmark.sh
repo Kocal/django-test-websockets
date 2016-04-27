@@ -52,7 +52,7 @@ echo "Making GNU Plot script..."
 cat << EOF > "$bench_dir/build.p"
 set terminal png
 set output "benchmark.png"
-set title "Tornado (${bench}): ab -k -n 2000 -c 100"
+set title "Django-socketio + uWSGI (${bench}): ab -k -n 2000 -c 100"
 set size 1,1
 set grid y
 set xlabel "requests"
