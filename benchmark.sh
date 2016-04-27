@@ -2,7 +2,7 @@
 
 set -e
 
-benchmark=-1
+benchmark=$1
 
 benchmarks=(
     py27-django18
@@ -49,7 +49,7 @@ echo "Making GNU Plot script..."
 cat << EOF > "$bench_dir/build.p"
 set terminal png
 set output "benchmark.png"
-set title "Tornado (${bench}): ab -k -n 100000 -c 100"
+set title "Tornado (${bench}): ab -k -n 2000 -c 100"
 set size 1,1
 set grid y
 set xlabel "requests"
@@ -63,9 +63,9 @@ EOF
 # ---
 
 echo "Starting benchmark $bench..."
-ab -k -n 2000 -c 100 -g "$bench_dir/01-hello-tornado.txt" http://127.0.0.1:8080/hello-tornado
-ab -k -n 2000 -c 100 -g "$bench_dir/02-django-polls.txt" http://127.0.0.1:8080/polls/
-ab -k -n 2000 -c 100 -g "$bench_dir/03-django-admin.txt" http://127.0.0.1:8080/admin/
+#ab -k -n 2000 -c 100 -g "$bench_dir/01-hello-tornado.txt" http://127.0.0.1:8080/hello-tornado
+#ab -k -n 2000 -c 100 -g "$bench_dir/02-django-polls.txt" http://127.0.0.1:8080/polls/
+#ab -k -n 2000 -c 100 -g "$bench_dir/03-django-admin.txt" http://127.0.0.1:8080/admin/
 
 # ---
 
