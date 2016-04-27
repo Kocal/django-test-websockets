@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 benchmark=-1
 
 benchmarks=(
@@ -48,22 +50,23 @@ echo "Making GNU Plot script..."
 cat << EOF > "$bench_dir/build.p"
 set terminal png
 set output "benchmark.png"
-set title "uWSGI + Django-websocket-redis (${bench}): ab -k -n 100000 -c 100"
+set title "uWSGI + Django-websocket-redis (${bench}): ab -k -n 2000 -c 100"
 set size 1,1
 set grid y
 set xlabel "requests"
 set ylabel "response time (ms)"
 
-plot "01-django-chatserver.txt" using 9 smooth sbezier with lines title "/chat", \
-plot "02-django-polls.txt" using 9 smooth sbezier with lines title "/polls", \
-plot "03-django-admin.txt" using 9 smooth sbezier with lines title "/admin"
+plot "01-django-chat.txt" using 9 smooth sbezier with lines title "/chat", \
+     "02-django-polls.txt" using 9 smooth sbezier with lines title "/polls", \
+     "03-django-admin.txt" using 9 smooth sbezier with lines title "/admin"
 EOF
 
 echo "Starting benchmark $bench..."
-ab -k -n 50000 -c 100 -g "01-django-chat.txt" http://127.0.0.1:8000/chat
-ab -k -n 50000 -c 100 -g "02-django-polls.txt" http://127.0.0.1:8000/polls
-ab -k -n 50000 -c 100 -g "03-django-admin.txt" http://127.0.0.1:8000/admin
+ab -k -n 2000 -c 100 -g "01-django-chat.txt" http://127.0.0.1:8000/chat/
+ab -k -n 2000 -c 100 -g "02-django-polls.txt" http://127.0.0.1:8000/polls/
+ab -k -n 2000 -c 100 -g "03-django-admin.txt" http://127.0.0.1:8000/admin/
 
+# ---
 
 echo "Running GNU Plot script..."
 gnuplot "${bench_dir}/build.p"

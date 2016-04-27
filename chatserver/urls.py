@@ -9,7 +9,7 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('',
-    url(r'^polls', include('polls.urls',  namespace='polls')),
+    url(r'^polls/', include('polls.urls',  namespace='polls')),
     url(r'^chat/$', BroadcastChatView.as_view(), name='broadcast_chat'),
     url(r'^userchat/$', UserChatView.as_view(), name='user_chat'),
     url(r'^groupchat/$', GroupChatView.as_view(), name='group_chat'),

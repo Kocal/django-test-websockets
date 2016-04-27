@@ -121,11 +121,11 @@ LOGGING = {
             'formatter': 'simple',
         },
     },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
+#    'loggers': {
+#       'django': {
+#           'handlers': ['console'],
+#            'level': 'DEBUG',
+#            'propagate': True,
+#        },
+#    },
 }
