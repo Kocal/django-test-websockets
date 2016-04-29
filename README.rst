@@ -647,7 +647,8 @@ Benchmark
 
 Architecture
 ------------
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
+django-websocket-redis_ depends of Redis_, an external dependency.
+I would say it's an heavy architecture but Redis is too lite or this.
 
 Event-driven programming
 ------------------------
