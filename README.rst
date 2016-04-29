@@ -26,7 +26,6 @@ Python 2.7    Django 1.8  `py27-django18`_  ✓ Yes                 ✗ No      
 Python 2.7    Django 1.9  `py27-django19`_  ✗ No                  ✗ No                      ✗ **No**
 Python 3.2    Django 1.8  `py32-django18`_  ✗ No                  ✗ No                      ✗ **No**
 Python 3.3    Django 1.8  `py33-django18`_  ✗ No                  ✗ No                      ✗ **No**
-Python 3.3    Django 1.9  `py33-django19`_  ✗ No                  ✗ No                      ✗ **No**
 Python 3.4    Django 1.9  `py34-django19`_  ✗ No                  ✗ No                      ✗ **No**
 Python 3.5    Django 1.8  `py35-django18`_  ✗ No                  ✗ No                      ✗ **No**
 Python 3.5    Django 1.9  `py35-django19`_  ✗ No                  ✗ No                      ✗ **No**
@@ -384,12 +383,6 @@ Websockets server works?
 
 I told you *Tox* can not install django-socketio_.
 
-py33-django19
-`````````````
-
-    ✗ Failed
-
-See `py33-django18`_.
 
 py34-django19
 `````````````
