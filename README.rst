@@ -424,7 +424,7 @@ Here a really small example for a webchat:
 
 .. code-block:: python
 
-    from django_socket import events
+    from django_socketio import events
 
     @events.on_connect
     def connect(request, socket, context):
