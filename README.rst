@@ -15,7 +15,6 @@ Summary
 -------
 Compatibility with Python and Django
 ````````````````````````````````````
-Numquam honeste facimus causa facimus ab non honestissime se insectarique sit detrahunt nostra causa quibus.
 
 ============  ==========  ================  ================  =============  =================
 Python        Django      More details      Websocket works?  Django works?  So, does it work?
@@ -50,7 +49,7 @@ Read more at `Architecture`_.
 
 Event-driven programming?
 `````````````````````````
-No, but I can make it like event-driven I guess.
+Yes, but only has 3 events.
 
 Read more at `Event-driven programming`_.
 
@@ -322,9 +321,12 @@ Tornado is an alternative to `WSGI <https://www.python.org/dev/peps/pep-3333/>`_
 
 Event-driven programming
 ------------------------
-No, but I already wrote something about this for `django-websocket-redis <https://github.com/Kocal/django-test-websocket
-s/tree/django-websocket-redis#event-driven-programming-1>`_, to see how I can implement an even-driver programming way
-for both server and client side.
+Yes, Tornado is using non-blocking network I/O and it integrates a routing system. You can easily do things like that:
+
+- Route ``/ws/hello-tornado``:run a WebSocket instance
+- Route ``.*``: run Django
+
+Also, Tornado implements simple WebSocket, no such thing as Socket.IO. 
 
 Documentation
 -------------
