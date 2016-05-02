@@ -2,7 +2,7 @@
 
 set -e
 
-benchmark=-1
+benchmark=$1
 
 benchmarks=(
     py27-django18
@@ -29,7 +29,7 @@ echo ""
 
 # ---
 
-while [[ ${benchmark} -lt 0 || ${benchmark} -gt $(( ${#benchmarks[*]} - 1)) ]]
+while [[ -z ${benchmark} || ${benchmark} -lt 0 || ${benchmark} -gt $(( ${#benchmarks[*]} - 1)) ]]
 do
     read -p "Choose a benchmark to run: " benchmark
 done
@@ -64,7 +64,7 @@ EOF
 echo "Starting benchmark $bench..."
 ab -k -n 2000 -c 100 -g "01-django-chat.txt" http://127.0.0.1:8000/chat/
 ab -k -n 2000 -c 100 -g "02-django-polls.txt" http://127.0.0.1:8000/polls/
-ab -k -n 2000 -c 100 -g "03-django-admin.txt" http://127.0.0.1:8000/admin/
+ab -k -n 2000 -c 100 -g "03-django-admin.txt" 'http://127.0.0.1:8000/admin/login/?next=/admin/'
 
 # ---
 
