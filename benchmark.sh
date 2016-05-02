@@ -29,7 +29,7 @@ echo ""
 
 # ---
 
-while [[ ${benchmark} -lt 0 || ${benchmark} -gt $(( ${#benchmarks[*]} - 1)) ]]
+while [[ -z ${benchmark} || ${benchmark} -lt 0 || ${benchmark} -gt $(( ${#benchmarks[*]} - 1)) ]]
 do
     read -p "Choose a benchmark to run: " benchmark
 done
@@ -63,9 +63,9 @@ EOF
 # ---
 
 echo "Starting benchmark $bench..."
-#ab -k -n 2000 -c 100 -g "$bench_dir/01-hello-tornado.txt" http://127.0.0.1:8080/hello-tornado
-#ab -k -n 2000 -c 100 -g "$bench_dir/02-django-polls.txt" http://127.0.0.1:8080/polls/
-#ab -k -n 2000 -c 100 -g "$bench_dir/03-django-admin.txt" http://127.0.0.1:8080/admin/
+ab -k -n 2000 -c 100 -g "$bench_dir/01-hello-tornado.txt" http://127.0.0.1:8000/hello-tornado
+ab -k -n 2000 -c 100 -g "$bench_dir/02-django-polls.txt" http://127.0.0.1:8000/polls/
+ab -k -n 2000 -c 100 -g "$bench_dir/03-django-admin.txt" "http://127.0.0.1:8000/admin/login/?next=/admin/"
 
 # ---
 

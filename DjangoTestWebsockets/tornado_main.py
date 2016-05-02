@@ -20,7 +20,7 @@ from myapp import hellowebsocket
 if django.VERSION[1] > 5:
     django.setup()
 
-define('port', type=int, default=8080)
+define('port', type=int, default=8000)
 
 
 class HelloHandler(tornado.web.RequestHandler):
